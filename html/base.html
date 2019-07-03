@@ -1,0 +1,74 @@
+
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>Incidencialo</title>
+      {% block css %} {% endblock %}
+      <link rel="stylesheet" title="Pagina de inicio" href="./html/css/index.css" />
+      <link rel="stylesheet" href="./html/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="./html/css/bootstrap.min.css" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <link rel="icon" title="icono" href="./html/images/alarma.png" />
+      
+  
+    </head>
+  
+    <body>
+      <header class ="header">
+          <div id="tituloizq">
+            <img src="./html/images/boton.jpg" alt="Logo HTML5" height="100" width="100">
+          </div>
+          <div id="tituloder">
+            <h1>Incidencialo</h1>
+            <p>Reportes sobre incidencias de la comunidad</p>
+          </div>
+      </header>
+      <nav>
+        {% block menu%}
+        
+        {% endblock%}
+      </nav>
+      <div id="cuerpo">
+          {% block lista %}
+
+          {% endblock %}
+        <main>
+            {% block main %}
+
+            {% endblock %}
+
+          </main>
+      
+      <aside>
+          <section>
+          <article>
+          <h3>Top Usuarios Comentando</h3>
+            <ul>
+              <li>El quijote</li>
+              <li>Ulises</li>
+              <li>Arguiñano cocina</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Top Usuarios Reportando Icidencias</h3>
+            <ul>
+              <li>Charles Dickens</li>
+              <li>Julio Verne</li>
+              <li>Edgar Allan Poe</li>
+            </ul>
+          </article>
+          <article>
+              <h3>Top Usuarios Votando</h3>
+              <ul>
+                <li>Charles Dickens</li>
+                <li>Julio Verne</li>
+                <li>Edgar Allan Poe</li>
+              </ul>
+            </article>
+        </section>
+        </aside>
+    </div>
+  
+  
+    </body>
+  </html>
+  

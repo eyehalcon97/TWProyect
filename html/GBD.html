@@ -1,0 +1,33 @@
+{% extends "html/base.html" %}
+
+
+{% block main %}
+<div class=titulo>
+    <h2> Ver Loggin </h2>
+  </div>
+  
+  {% endblock %}
+
+  {% block menu %}
+  
+  <ul class="nav nav-pills">
+          <li class="nav-item"><a class="nav-link" href="./index.php">Ver Incidencias</a></li>
+          <li class="nav-item"><a class="nav-link" href="./NIncidencia.php">Nueva Incidencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="./GUsuario.php">Gestion de Usuario</a></li>
+          <li class="nav-item"><a class="nav-link" href="./VLog.php">Ver Log</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./GBD.php">Gestion de Base de Datos</a></li>
+          <form>
+            <label class="sr-only" for="inlineFormInput">Usuario</label>
+            <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe">
+            <label class="sr-only" for="inlineFormInputGroup">Contraseña</label>
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+            <button type="submit" class="btn btn-primary mb-2">Entrar</button>
+            <button type="submit" class="btn btn-primary mb-2"><a class ="CrearUsuario" href="./CUsuario.php">Crear</a></button>
+
+          </form>
+  
+      </ul>
+    
+  
+      {% endblock %}

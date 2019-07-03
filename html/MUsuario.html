@@ -1,0 +1,88 @@
+{% extends "html/base.html" %}
+
+
+{% block main %}
+<div class=contenido>
+  <div class=CUsuario>
+  <img src="./html/images/login.png" alt="" height="60" width="60" class="foto">
+  <section class="articulo">
+      <h2>  Mi Usuario </h2>
+      <form>
+          <div class="form-group">
+          <label for="exampleFormControlFile1">Foto de Perfil</label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="validationDefault01">Nombre</label>
+              <input type="text" class="form-control" id="validationDefault01" placeholder="Nombre" value="Mark" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationDefault02">Primer Apellido</label>
+              <input type="text" class="form-control" id="validationDefault02" placeholder="Primer Apellido" value="Otto" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationDefault02">Segundo Apellido</label>
+              <input type="text" class="form-control" id="validationDefault02" placeholder="Segundo Apellido" value="Otto" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationDefaultUsername">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Nombre de Usuario" aria-describedby="inputGroupPrepend2" required>
+            </div>
+            <div class="form-group row">
+              <label for="form-email" class="col-sm-2 col-form-label">E-mail: </label>
+              <div class="col-sm-10">
+                <input type="email" id="form-email" name="email" class="form-control" autocomplete="username email">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="form-email1" class="col-sm-2 col-form-label">Contraseña</label>
+              <div class="col-sm-5">
+                <input type="password" class="form-control" id="form-pass1" name="pass" placeholder="Password" autocomplete="current-password">
+                <p id="msgErrorPass" hidden></p>
+              </div>
+              <div class="col-sm-5">
+                <input type="password" class="form-control" id="form-pass2" name="pass-confirm" placeholder="Confirmar" autocomplete="current-password">
+              </div>
+          </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault03">Ciudad</label>
+              <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="validationDefault04">Pais</label>
+              <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+            </div>
+          <button class="btn btn-primary" type="submit">Modificar</button>
+        </form>
+        </section>
+  </div>
+</div>
+
+  {% endblock %}
+
+  {% block menu %}
+  
+  <ul class="nav nav-pills">
+          <li class="nav-item"><a class="nav-link" href="./index.php">Ver Incidencias</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./NIncidencia.php">Nueva Incidencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="./GUsuario.php">Gestion de Usuario</a></li>
+          <li class="nav-item"><a class="nav-link" href="./VLog.php">Ver Log</a></li>
+          <li class="nav-item"><a class="nav-link" href="./GBD.php">Gestion de Base de Datos</a></li>
+          <form>
+            <label class="sr-only" for="inlineFormInput">Usuario</label>
+            <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe">
+            <label class="sr-only" for="inlineFormInputGroup">Contraseña</label>
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+            <button type="submit" class="btn btn-primary mb-2">Entrar</button>
+            <button type="submit" class="btn btn-primary mb-2"><a class ="CrearUsuario" href="./CUsuario.php">Crear</a></button>
+
+          </form>
+  
+      </ul>
+    
+  
+      {% endblock %}
