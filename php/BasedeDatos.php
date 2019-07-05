@@ -5,18 +5,20 @@ class BasedeDatos
     private static $linkBase ="localhost";
     private static $usuario = "root";
     private static $passw = "";
+    private static $basededatos = "basedatos";
+    
     private static $BD = null;
 
 
 
     private static function Conectar(){
-        $BD =  mysql_connect($linkBase, $usuario, $passw);
+        BasedeDatos::$BD =  new mysqli("localhost", "root", "","basedatos");
         
-            if (!$BD) {
-                die('No pudo conectarse: ' . mysql_error());
+            if (!BasedeDatos::$BD) {
+                die('No pudo conectarse: ' . mysqli_error());
             }
         
-        return $BD;
+        return BasedeDatos::$BD;
 
     }
 
@@ -25,10 +27,11 @@ class BasedeDatos
         if($resultado = (BasedeDatos::$BD)->query($operacion)){
             return $resultado;
         }else{
-            die('Error en la sentencia ' . mysql_error());
+            echo 'Error en la sentencia ' ;
         }
 
     }
+
 
 }
 
