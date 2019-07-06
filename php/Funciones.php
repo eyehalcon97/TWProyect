@@ -134,6 +134,12 @@ function getidusuario($Usuario){
     $elemento = $resultado->fetch_assoc();
     return $elemento['id'];
 }
+function getipousuario($id){
+    $sentencia= "SELECT Tipo FROM usuarios WHERE id = '$id';";
+    $resultado = BasedeDatos::ejecutar($sentencia);
+    $elemento = $resultado->fetch_assoc();
+    return $elemento['Tipo'];
+}
 
 function existeUsuario($Usuario){
     $sentencia= "SELECT * FROM usuarios WHERE Usuario = '$Usuario';";
@@ -290,17 +296,37 @@ function BuscarUsuario($Usuario){
 
 }
 
-//function Like($id){
-//    $Likes = getLikes($id);
-//    $Lik = $Likes +1;
-//    $sentencia = "UPDATE incidencias SET likes='$Lik' where id = '$id' ;";
-//    BasedeDAtos::ejecutar($sentencia);
-
-//}
 
 function ModificarUsuario($id,$Nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto){
-    $sentencia = "UPDATE incidencias SET likes='$Lik' where id = '$id' ;";
-    BasedeDAtos::ejecutar($sentencia);
+    $array = array();
+    $sentencia = "UPDATE usuarios SET nombre='$Nombre' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Papellido='$Papellido' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Sapellido='$Sapellido' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Psw='$Psw' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET email='$email' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Usuario='$Usuario' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Ciudad='$Ciudad' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Pais='$Pais' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Tipo='$Tipo' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Estado='$Estado' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE usuarios SET Foto='$Foto' where id = '$id' ;";
+    array_push($array,$sentencia);
+
+
+    foreach($array as $valor){
+        BasedeDAtos::ejecutar($valor);
+    }
+
 
 }
 

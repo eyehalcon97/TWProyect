@@ -4,16 +4,23 @@
     ini_set('display_errors', '1');
 
     require_once './vendor/autoload.php';
+    require_once './php/funciones.php';
 
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
 
-    
+    $Usuario ="eyehalcon97";
+    $id = getidusuario($Usuario);
+    $tipo = getipousuario($id);
 
-
-    $template = $twig->load('/html/GBD.html');
-
-    echo $template->render();
+    $argumentosTwig = [ 'tipo' => $tipo];
+    if($tipo != "Administrador"){
+        $template = $twig->load('/html/Error.html');
+    }
+    else{
+        $template = $twig->load('/html/GBD.html');
+    }
+    echo $template->render($argumentosTwig);
     
 
 ?>

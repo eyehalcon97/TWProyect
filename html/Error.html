@@ -1,0 +1,16 @@
+{% extends "html/base.html" %}
+
+{% block main %}
+
+    <h2> Ups, parece que quieres acceder a una pagina sin acceso, Puedes intentarlo iniciando sesion con una cuenta con permisos: </h2>
+
+    <form>
+            <label class="sr-only" for="inlineFormInput">Usuario</label>
+            <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe">
+            <label class="sr-only" for="inlineFormInputGroup">Contraseña</label>
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+            <button type="submit" class="btn btn-primary mb-2">Entrar</button>
+    </form>
+
+
+{% endblock %}

@@ -6,13 +6,17 @@
     require_once './vendor/autoload.php';
     require_once './php/funciones.php';
 
-    $idUsuario = "eyehalcon";
-    $usuario = BuscarUsuario($idUsuario);
-    
-
+    var_dump ($usuario);
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
-    if( isset($_POST['btnCrear'])){
+
+    
+    $Usuario ="eyehalcon97";
+    $id = getidusuario($Usuario);
+    $tipo = getipousuario($id);
+
+
+    if( isset($_POST['btnModificar'])){
         
         $Nombre = $_POST['Nombre'];
         $Papellido = $_POST['Papellido'];
@@ -23,8 +27,8 @@
         $Usuario = $_POST['User'];
         $Ciudad = $_POST['Ciudad'];
         $Pais = $_POST['Pais'];
-        $Tipo = "Administrador";
-        $Estado = "SinVerificar";
+        $Tipo = $_POST['Tipo'];
+        $Estado = $_POST['Estado'];
         $Foto = $_POST['Foto'];
 
 
@@ -35,10 +39,12 @@
        
    }
 
-    $argumentosTwig = ['user' => $usuario ];
-
+    $argumentosTwig = ['user' => $usuario  ,'tipo' => $tipo ];
+    if($tipo != "Administrador" && $tipo != "Colaborador" ){
+        $template = $twig->load('/html/Error.html');
+    }else{
     $template = $twig->load('/html/MUsuario.html');
-
+    }
     echo $template->render($argumentosTwig);
     
 

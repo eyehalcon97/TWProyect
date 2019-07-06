@@ -9,8 +9,15 @@
     $incidencias = ObtenerTodasIncidencias();
     $numeroincidencias = obtenernumeroIncidencias();
 
+
+
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
+    
+    $Usuario ="eyehalcon97";
+    $id = getidusuario($Usuario);
+    $tipo = getipousuario($id);
+
 
     if( isset($_POST['Like'])){
         $id = $_POST['id'];
@@ -31,7 +38,7 @@
         EliminarIncidenciaporid($id);
         
     }
-    $argumentosTwig = ['incidencias' => $incidencias ,'nincidencia' => $numeroincidencias ];
+    $argumentosTwig = ['incidencias' => $incidencias ,'nincidencia' => $numeroincidencias , 'tipo' => $tipo];
 
     $template = $twig->load('/html/index.html');
 

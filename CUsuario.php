@@ -9,6 +9,10 @@
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
 
+    $Usuario ="eyehalcon97";
+    $id = getidusuario($Usuario);
+    $tipo = getipousuario($id);
+
     if( isset($_POST['btnCrear'])){
 
          $Nombre = $_POST['Nombre'];

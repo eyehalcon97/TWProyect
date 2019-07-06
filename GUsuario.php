@@ -10,7 +10,9 @@
 
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
-
+    $Usuario ="eyehalcon97";
+    $id = getidusuario($Usuario);
+    $tipo = getipousuario($id);
     
 
     if( isset($_POST['Editar'])){
@@ -24,10 +26,12 @@
         
     }
     
-    $argumentosTwig = ['usuarios' => $usu ];
-
+    $argumentosTwig = ['usuarios' => $usu ,'tipo' => $tipo ];
+    if($tipo != "Administrador"){
+        $template = $twig->load('/html/Error.html');
+    }else{
     $template = $twig->load('/html/GUsuario.html');
-
+    }
     echo $template->render($argumentosTwig);
     
 
