@@ -156,6 +156,10 @@ main .titulo{
 main .contenido{
   display: flex;
   flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 
 }
 .list-group{
@@ -213,7 +217,10 @@ main div.card.mb-3{
   justify-items: center;
 }
 
-
+.Editar .form-control{
+  display: none;
+  display: hidden;
+}
 
 
 

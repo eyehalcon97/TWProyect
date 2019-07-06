@@ -8,6 +8,9 @@
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
 
+    
+
+
     $template = $twig->load('/html/GBD.html');
 
     echo $template->render();

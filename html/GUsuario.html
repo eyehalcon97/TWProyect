@@ -5,6 +5,7 @@
 <div class=titulo>
     <h2> Gestion de Usuarios </h2>
   </div>
+  {% for usuario in usuarios %}
   <div class=contenido>
     <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
       <div id="list-item-1" class="card mb-3" style="max-width: 540px;">
@@ -14,21 +15,26 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">Nombre de Usuario</h5>
-                <p class="card-text">Correo electronico</p>
-                <p class="card-text">Nombre real</p>
-                <p class="card-text"><small class="text-muted">Ultima conexion</small></p>
+                <h5 class="card-title">{{usuario.getUsuario}}</h5>
+                <p class="card-text">{{usuario.getEmail}}</p>
+                <p class="card-text">{{usuario.getNombre}} {{usuario.getPapellido}} {{usuario.getSapellido}}</p>
+                <p class="card-text">{{usuario.getTipo}}</p>
+                <p class="card-text">{{usuario.getEstado}}</p>
+                <p class="card-text"><small class="text-muted">{{usuario.getConexion}}</small></p>
+                <form action="" class=Editar method="POST"> 
+                  
+                  <input  class="form-control"name=id value={{usuario.getId}} required>
+                  <button class="btn btn-primary" type="submit" name="Editar">Editar</button>
+                  <button class="btn btn-primary" type="submit" name="Eliminar">Eliminar</button>
+              </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  
-      <h4 id="list-item-2">Item 2</h4>
-  
-      <h4 id="list-item-3">Item 3</h4>
-  
-      <h4 id="list-item-4">Item 4</h4>
-  
+    </div>
+      {% endfor %}
+
       <ul class="pagination">
           <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -43,7 +49,7 @@
           </li>
         </ul>
   
-    </div>
+    
   {% endblock %}
 
   {% block menu %}

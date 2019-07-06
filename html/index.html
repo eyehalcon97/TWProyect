@@ -3,18 +3,25 @@
 {% block lista %}
 <div id="list-example" class="list-group">
     <h2>Contenidos</h2>
-    <a class="list-group-item list-group-item-action" href="#list-item-1">Item 1</a>
-    <a class="list-group-item list-group-item-action" href="#list-item-2">Item 2</a>
-    <a class="list-group-item list-group-item-action" href="#list-item-3">Item 3</a>
-    <a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>
+    {% for n in nincidencia %}
+    {% set numero = '# : n' %}
+    <a class="list-group-item list-group-item-action" href= " {{ numero.href }} " >Item 1</a>
+    {% endfor %}
+    
+
   </div>
 {% endblock %}
 {% block main %}
 <div class=titulo>
     <h2> Mis Incidencias </h2>
   </div>
+
+  {% for incidencia in incidencias %}
   <div class=contenido>
+      
     <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+
+      
       <div id="list-item-1" class="card mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
           <div class="col-md-4">
@@ -22,19 +29,28 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <h5 class="card-title">{{ incidencia.getTitulo }}</h5>
+              <p class="card-text"><small class="text-muted">{{ incidencia.getLugar}}</small></p>
+              <p class="card-text"> {{ incidencia.getDescripcion}}</p>
+              <p class="card-text"><small class="text-muted">{{ incidencia.getFecha}} by {{incidencia.getIdUsuario}}</small></p>
+              <p class="card-text"><small class="text-muted"> Likes: {{ incidencia.getLikes}}</small></p>
+              <p class="card-text"><small class="text-muted"> Dislikes: {{ incidencia.getDislikes}}</small></p>
+              <form action="" class=Editar method="POST"> 
+                  <input  class="form-control"name=id value= {{incidencia.getId}} required>
+                  <button class="btn btn-primary" type="submit" name="Like">Like</button>
+                  <button class="btn btn-primary" type="submit" name="Dislike">Dislike</button>
+                  <button class="btn btn-primary" type="submit" name="Editar">Editar</button>
+                  <button class="btn btn-primary" type="submit" name="Comentar">Comentar</button>
+                  <button class="btn btn-primary" type="submit" name="Eliminar">Eliminar</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
-  
-      <h4 id="list-item-2">Item 2</h4>
-  
-      <h4 id="list-item-3">Item 3</h4>
-  
-      <h4 id="list-item-4">Item 4</h4>
+    </div>
+  </div>
+        {% endfor %}
+
   
       <ul class="pagination">
           <li class="page-item disabled">
@@ -49,8 +65,7 @@
             <a class="page-link" href="#">Next</a>
           </li>
         </ul>
-  
-    </div>
+
   {% endblock %}
 
   {% block menu %}

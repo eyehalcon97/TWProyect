@@ -8,29 +8,35 @@
 <div class=contenido>
         <div class=CUsuario></div>
         
-            <form>
+            <form action="" method="POST">
                 <div class="form-group">
                 <label for="exampleFormControlFile1">Foto</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <input type="file" name ="Foto" class="form-control-file" id="exampleFormControlFile1">
                 </div>
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
                     <label for="validationDefault01">TItulo de la Incidencia</label>
-                    <input type="text" class="form-control" id="validationDefault01" placeholder="Titulo" value="Titulo" required>
+                    <input type="text" name ="Titulo"class="form-control" id="validationDefault01" placeholder="Titulo" value="Titulo" required>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="validationDefault02">Descripcion</label>
-                    <input type="text" class="form-control" id="validationDefault02" placeholder="Descripcionç" value="Descripcion" required>
+                    <input type="text" name ="Descripcion" class="form-control" id="validationDefault02" placeholder="Descripcion" value="Descripcion" required>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <label for="validationDefaultUsername">Nombre de Usuario</label>
-                      <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Nombre de Usuario" autocomplete="username email" aria-describedby="inputGroupPrepend2" required>
-                  </div>
+                      <label for="validationDefault02">Palabras Claves</label>
+                      <input type="text" name ="Palabras" class="form-control" id="validationDefault02" placeholder="Palabras clave" value="Palabras clve" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefault02">Lugar</label>
+                        <input type="text" name ="Lugar" class="form-control" id="validationDefault02" placeholder="Lugar" value="Lugar" required>
+                      </div>
+                      
+
                 </div>
                 <div class="form-row">
 
 
-                <button class="btn btn-primary" type="submit">Crear</button>
+                <button class="btn btn-primary" type="submit" name="btnCrear">Crear</button>
               </form>
         </div>
 </div>
