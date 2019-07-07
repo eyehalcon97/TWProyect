@@ -21,9 +21,9 @@ require_once'./php/Log.php';
 //echo $user;
 
 
-function CrearUsuario($nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto,$Votos){
-    $sentencia = "INSERT INTO usuarios(nombre,Papellido,Sapellido,Psw,email,Usuario,Ciudad,Pais,Tipo,Estado,Foto,Votos)
-    VALUES ('$nombre','$Papellido','$Sapellido','$Psw','$email','$Usuario','$Ciudad','$Pais','$Tipo','$Estado','$Foto','$Votos');";
+function CrearUsuario($nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto,$Votos,$Reportes,$Comentarios){
+    $sentencia = "INSERT INTO usuarios(nombre,Papellido,Sapellido,Psw,email,Usuario,Ciudad,Pais,Tipo,Estado,Foto,Votos,Reportes,Comentarios)
+    VALUES ('$nombre','$Papellido','$Sapellido','$Psw','$email','$Usuario','$Ciudad','$Pais','$Tipo','$Estado','$Foto','$Votos','$Reportes','$Comentarios');";
     BasedeDatos::ejecutar($sentencia);
 }
 
@@ -320,7 +320,7 @@ function ObtenerTodosUsuarios(){
     
     while( $elemento = $resultado->fetch_assoc() ){
         
-        $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos']);
+        $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos'],$elemento['Reportes'],$elemento['Comentarios']);
         array_push($arrayDevolucion,$usuario);
     }
     //echo $arrayDevolucion;
@@ -391,7 +391,7 @@ function BuscarUsuario($Usuario){
     
     
     $elemento = $resultado->fetch_assoc();
-    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos']);
+    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos'],$elemento['Reportes'],$elemento['Comentarios']);
         
     
 
@@ -407,7 +407,7 @@ function obtenerUsuarioporId($idUsuario){
     
     
     $elemento = $resultado->fetch_assoc();
-    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos']);
+    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos'],$elemento['Reportes'],$elemento['Comentarios']);
         
     
 
@@ -471,6 +471,105 @@ function ModificarIncidencia($id,$Titulo,$Descripcion,$Lugar,$Estado,$Foto,$Pala
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function ObtenerTopVotos(){
+    
+    $sentencia= "SELECT * FROM usuarios WHERE Usuario != 'Anonimo' ORDER BY Votos DESC ;";
+
+    
+    
+    $resultado = BasedeDatos::ejecutar($sentencia);
+
+    $arrayDevolucion = array();
+    
+    
+    while( $elemento = $resultado->fetch_assoc() ){
+        $incidencia = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos'],$elemento['Reportes'],$elemento['Comentarios']);
+        array_push($arrayDevolucion,$incidencia);
+    }
+
+    
+    return $arrayDevolucion;
+}
+
+function ObtenerTopReportes(){
+    
+    $sentencia= "SELECT * FROM usuarios WHERE Usuario != 'Anonimo' ORDER BY Reportes DESC ;";
+
+    
+    
+    $resultado = BasedeDatos::ejecutar($sentencia);
+
+    $arrayDevolucion = array();
+    
+    
+    while( $elemento = $resultado->fetch_assoc() ){
+        $incidencia = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos'],$elemento['Reportes'],$elemento['Comentarios']);
+        array_push($arrayDevolucion,$incidencia);
+    }
+
+    
+    return $arrayDevolucion;
+}
+
+function ObtenerTopComentarios(){
+    
+    $sentencia= "SELECT * FROM usuarios WHERE Usuario != 'Anonimo' ORDER BY Comentarios DESC ;";
+
+    
+    
+    $resultado = BasedeDatos::ejecutar($sentencia);
+
+    $arrayDevolucion = array();
+    
+    
+    while( $elemento = $resultado->fetch_assoc() ){
+        $incidencia = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos'],$elemento['Reportes'],$elemento['Comentarios']);
+        array_push($arrayDevolucion,$incidencia);
+    }
+
+    
+    return $arrayDevolucion;
+}
+
+
+
+
+function UsuarioComentario($id){
+    $numero = getUsuarioComentario($id);
+    $num = $numero +1;
+    $sentencia = "UPDATE usuarios SET Comentarios='$num' where Usuario = '$id' ;";
+    BasedeDAtos::ejecutar($sentencia);
+
+}
+
+function getUsuarioComentario($id){
+    $sentencia= "SELECT Comentarios FROM usuarios WHERE Usuario = '$id';";
+    $resultado = BasedeDAtos::ejecutar($sentencia);
+    $elemento = $resultado->fetch_assoc();
+    return $elemento['Comentarios'];
+}
+
+
 
 
 

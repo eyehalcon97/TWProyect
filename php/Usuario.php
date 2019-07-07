@@ -16,9 +16,11 @@ class Usuario {
     private $Estado;
     private $Fotos;
     private $Votos;
+    private $Reportes;
+    private $Comentarios;
 
     
-    function __construct($Id,$Nombre,$Papellido,$Sapellido,$Psw,$Email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Fotos,$Votos){
+    function __construct($Id,$Nombre,$Papellido,$Sapellido,$Psw,$Email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Fotos,$Votos,$Reportes,$Comentarios){
     $this->Id = $Id;
     $this->Nombre=$Nombre;
     $this->Papellido=$Papellido;
@@ -73,6 +75,12 @@ class Usuario {
     }
     function getVotos(){
         return $this->Votos;
+    }
+    function getReportes(){
+        return $this->Reportes;
+    }
+    function getComentarios(){
+        return $this->Comentarios;
     }
    
 }

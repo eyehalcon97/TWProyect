@@ -42,32 +42,37 @@
             <section>
             <article>
             <h3>Top Usuarios Comentando</h3>
-              <ul>
-                <li>El quijote</li>
-                <li>Ulises</li>
-                <li>Arguiñano cocina</li>
-              </ul>
+            {% for i in Comentarios|slice(0, 3) %}
+                <ul>
+                  <li>{{i.getUsuario}}</li>
+                </ul>
+
+                {% endfor %}
+
             </article>
             <article>
               <h3>Top Usuarios Reportando Icidencias</h3>
-              <ul>
-                <li>Charles Dickens</li>
-                <li>Julio Verne</li>
-                <li>Edgar Allan Poe</li>
-              </ul>
+              {% for i in Reportes|slice(0, 3) %}
+                <ul>
+                  <li>{{i.getUsuario}}</li>
+                </ul>
+
+                {% endfor %}
+
             </article>
             <article>
                 <h3>Top Usuarios Votando</h3>
+                {% for i in Votos|slice(0, 3) %}
                 <ul>
-                  <li>Charles Dickens</li>
-                  <li>Julio Verne</li>
-                  <li>Edgar Allan Poe</li>
+                  <li>{{i.getUsuario}}</li>
                 </ul>
+
+                {% endfor %}
               </article>
           </section>
           </aside>
     </div>
-  
+
     <footer>
       
         <section>
@@ -83,6 +88,7 @@
       </section>
     
       </footer>
+
 
     </body>
   </html>

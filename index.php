@@ -111,8 +111,15 @@
         EliminarIncidenciaporid($id);
         header("Location: ./index.php"); 
     }
-    
 
+
+
+    $Votos = ObtenerTopVotos();
+    $argumentosTwig['Votos']=$Votos;
+    $comentarios = ObtenerTopComentarios();
+    $argumentosTwig['Comentarios']=$comentarios;
+    $Reportes = ObtenerTopReportes();
+    $argumentosTwig['Reportes']=$Reportes;
     
 
     

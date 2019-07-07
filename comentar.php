@@ -83,6 +83,10 @@
             $Usuario = "Anonimo";
         }
         CrearComentario($id,$Usuario,$comentario);
+        
+        UsuarioComentario($id);
+        echo "goa";
+
         header("Location: ./index.php");
     }
 
