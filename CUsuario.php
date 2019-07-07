@@ -25,7 +25,12 @@
          $Pais = $_POST['Pais'];
          $Tipo = "Visitante";
          $Estado = "SinVerificar";
-         $Foto = $_POST['Foto'];
+        $Ruta = "./Foto/" . $_POST['Nombre'] . ".jpg";
+         $fp = fopen($Ruta , "c+" );
+         fwrite($fp, $_FILES['Foto'] . PHP_EOL);
+         fclose($fp);  
+         
+         $Foto = $Ruta;
          $Votos = 0;
          $Reportes = 0;
          $Comentarios = 0;
