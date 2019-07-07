@@ -93,12 +93,10 @@
   
       </ul>
     {%endif%}
-    {% if tipo == "Colaborador" %}
+    {% if tipo == "Visitante"%}
   
   <ul class="nav nav-pills">
-          <li class="nav-item"><a class="nav-link" href="./index.php">Ver Incidencias</a></li>
-          <li class="nav-item"><a class="nav-link" href="./NIncidencia.php">Nueva Incidencia</a></li>
-          <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
           <form form action="" class=Editar method="POST">
             <label class="sr-only"  for="inlineFormInput">Usuario</label>
             <input type="text" name="user"  readonly="readonly" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
@@ -116,6 +114,7 @@
 
     {% if tipo != "Administrador" %}
       {% if tipo != "Colaborador" %}
+        {% if tipo != "Visitante" %}
     
       <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
@@ -131,6 +130,7 @@
       
           </ul>
       {%endif%}
+    {%endif%}
     {%endif%}
     
       {% endblock %}

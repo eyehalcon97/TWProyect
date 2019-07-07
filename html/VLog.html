@@ -5,43 +5,25 @@
 <div class=titulo>
     <h2> Ver Loggin </h2>
   </div>
+  {% for Log in Logs %}
   <div class=contenido>
     <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-      <div id="list-item-1" class="card mb-3" style="max-width: 540px;">
+      <div id="list-item-1" class="card mb-3" style="max-width: 540px;"></div>
         <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="..." class="card-img" alt="...">
-          </div>
           <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">Nombre de Usuario</h5>
-                <p class="card-text"><small class="text-muted">Conexion a las 00:00</small></p>
+                <h5 class="card-title">Usuario: {{Log.getUsuario}} </h5>
+                <p class="card-text"> tipo: {{Log.getTipo}} </p>
+                <p class="card-text"><small class="text-muted">Fecha: {{Log.getFecha}}</small></p>
             </div>
-          </div>
+          
         </div>
       </div>
   
-      <h4 id="list-item-2">Item 2</h4>
-  
-      <h4 id="list-item-3">Item 3</h4>
-  
-      <h4 id="list-item-4">Item 4</h4>
-  
-      <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-  
+
     </div>
+  </div>
+  {%endfor%}
   {% endblock %}
 
   {% block menu %}

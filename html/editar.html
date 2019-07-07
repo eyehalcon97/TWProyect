@@ -31,11 +31,19 @@
                         <label for="validationDefault02">Lugar</label>
                         <input type="text" name ="Lugar" class="form-control" id="validationDefault02" placeholder="Lugar" value={{incidencia.getLugar}} required>
                       </div>
+
+                      {%if userad.getTipo == "Administrador"%}
                       <div class="col-md-4 mb-3">
                             <label for="validationDefault02">Estado</label>
                             <input type="text" name ="Estado" class="form-control" id="validationDefault02" placeholder="Lugar" value={{incidencia.getEstado}} required>
                           </div>
-                      
+                      {% endif %}
+                      {%if userad.getTipo != "Administrador"%}
+                      <div class="col-md-4 mb-3">
+                            <label for="validationDefault02">Estado</label>
+                            <input type="text" name ="Estado" class="form-control" id="validationDefault02" placeholder="Lugar" readonly="readonly" value={{incidencia.getEstado}} required>
+                          </div>
+                      {% endif %}
 
                 </div>
                 <div class="form-row">
@@ -53,7 +61,7 @@
   {% if tipo == "Administrador" %}
   
   <ul class="nav nav-pills">
-          <li class="nav-item"><a class="nav-link" href="./index.php">Ver Incidencias</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
           <li class="nav-item"><a class="nav-link" href="./NIncidencia.php">Nueva Incidencia</a></li>
           <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
           <li class="nav-item"><a class="nav-link" href="./GUsuario.php">Gestion de Usuario</a></li>
@@ -61,30 +69,49 @@
           <li class="nav-item"><a class="nav-link" href="./GBD.php">Gestion de Base de Datos</a></li>
           <form form action="" class=Editar method="POST">
               <label class="sr-only"  for="inlineFormInput">Usuario</label>
-              <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
+              <input type="text"  readonly="readonly" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
               <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-              <input type="text" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+              <input type="password"  readonly="readonly" name="Psw" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+              <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
               <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
 
             </form>
   
       </ul>
     {%endif%}
-    {% if tipo == "Colaborador" %}
+    {% if tipo == "Colaborador"%}
   
   <ul class="nav nav-pills">
-          <li class="nav-item"><a class="nav-link" href="./index.php">Ver Incidencias</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
           <li class="nav-item"><a class="nav-link" href="./NIncidencia.php">Nueva Incidencia</a></li>
           <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
           <form form action="" class=Editar method="POST">
-              <label class="sr-only"  for="inlineFormInput">Usuario</label>
-              <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
-              <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-              <input type="text" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
-              <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
-             
+            <label class="sr-only"  for="inlineFormInput">Usuario</label>
+            <input type="text" name="user"  readonly="readonly" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
+            
+            <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
+            <input type="password" name="Psw"  readonly="readonly" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+            <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
+            <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
 
-            </form>
+          </form>
+  
+      </ul>
+    {%endif%}
+    {% if tipo == "Visitante"%}
+  
+  <ul class="nav nav-pills">
+          <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
+          <form form action="" class=Editar method="POST">
+            <label class="sr-only"  for="inlineFormInput">Usuario</label>
+            <input type="text" name="user"  readonly="readonly" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
+            
+            <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
+            <input type="password" name="Psw"  readonly="readonly" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+            <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
+            <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
+
+          </form>
   
       </ul>
     {%endif%}
@@ -92,21 +119,23 @@
 
     {% if tipo != "Administrador" %}
       {% if tipo != "Colaborador" %}
+        {% if tipo != "Visitante" %}
     
       <ul class="nav nav-pills">
-              <li class="nav-item"><a class="nav-link" href="./index.php">Ver Incidencias</a></li>
+              <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
               <form form action="" class=Editar method="POST">
                   <label class="sr-only"  for="inlineFormInput">Usuario</label>
-                  <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
-                  <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-                  <input type="text" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+                  <input type="text" name="user" class="form-control" id="inlineFormInput" value="Usuario">
+                  <label class="sr-only"   for="inlineFormInputGroup">Contraseña</label>
+                  <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
                   <button type="submit" name="Entrar" class="btn btn-primary mb-2">Entrar</button>
-                  <button type="submit" class="btn btn-primary mb-2"><a class ="CrearUsuario" href="./CUsuario.php">Crear</a></button>
+                  <button type="submit" name="Crear" class="btn btn-primary mb-2">Crear</button>
     
                 </form>
       
           </ul>
       {%endif%}
+    {%endif%}
     {%endif%}
     
       {% endblock %}

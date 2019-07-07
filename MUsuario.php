@@ -40,14 +40,17 @@
             $user = BuscarUsuario($Usuario);
             $argumentosTwig['user']=$user;
             $argumentosTwig['userad'] =$user;
-            header("Location: ./index.php");
+            CrearLog($User,"Entrar");
+            header("Location: ./MUsuario.php");
         }
 
     }
     if( isset($_POST['Crear'])){
+        
         header("Location: ./CUsuario.php");
     }
     if( isset($_POST['Salir'])){
+        CrearLog($_SESSION["Nombre"],"Salir");
         if(session_status()==PHP_SESSION_NONE){
             session_start();
         } 
@@ -100,7 +103,7 @@
    }
 
     
-    if($argumentosTwig['tipo'] != "Administrador" && $argumentosTwig['tipo'] != "Colaborador" ){
+    if($argumentosTwig['tipo'] != "Administrador" && $argumentosTwig['tipo'] != "Colaborador"  &&  $argumentosTwig['tipo'] != "Visitante" ){
         $template = $twig->load('/html/Error.html');
     }else{
     $template = $twig->load('/html/MUsuario.html');

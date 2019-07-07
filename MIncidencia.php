@@ -42,7 +42,8 @@
             $argumentosTwig['tipo']=$tipo;
             $user = BuscarUsuario($Usuario);
             $argumentosTwig['user']=$user;
-            header("Location: ./index.php");
+            CrearLog($User,"Entrar");
+            header("Location: ./MIncidencia.php");
         }
 
     }
@@ -50,6 +51,7 @@
         header("Location: ./CUsuario.php");
     }
     if( isset($_POST['Salir'])){
+        CrearLog($_SESSION["Nombre"],"Salir");
         if(session_status()==PHP_SESSION_NONE){
             session_start();
         } 

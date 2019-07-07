@@ -23,7 +23,7 @@
          $Usuario = $_POST['User'];
          $Ciudad = $_POST['Ciudad'];
          $Pais = $_POST['Pais'];
-         $Tipo = "Colaborador";
+         $Tipo = "Visitante";
          $Estado = "SinVerificar";
          $Foto = $_POST['Foto'];
 
@@ -47,7 +47,8 @@
             $argumentosTwig['tipo']=$tipo;
             $user = BuscarUsuario($Usuario);
             $argumentosTwig['user']=$user;
-            header("Location: ./index.php");
+            CrearLog($User,"Entrar");
+            header("Location: ./CUsuario.php");
         }
 
     }

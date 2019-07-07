@@ -3,6 +3,7 @@ require_once'./php/BasedeDatos.php';
 require_once'./php/Incidencia.php';
 require_once'./php/Usuario.php';
 require_once'./php/Comentario.php';
+require_once'./php/Log.php';
 
 //echo "hola";
 //CrearUsuario("manuel","yo","yo","1234","example@ugr","eyehalcon97","cantabria","Lisboa","Administrador","Activo","Foto");
@@ -36,6 +37,26 @@ function CrearComentario($idIncidencia,$idusuario,$comentario){
     $sentencia = "INSERT INTO comentarios(idIncidencia,idusuario,comentario)
     VALUES ('$idIncidencia','$idusuario','$comentario');";
     BasedeDatos::ejecutar($sentencia);
+}
+function CrearLog($Usuario,$Tipo){
+    $sentencia = "INSERT INTO logg(Usuario,Tipo)
+    VALUES ('$Usuario','$Tipo');";
+    BasedeDatos::ejecutar($sentencia);
+}
+function obtenerLog(){
+    $sentencia= "SELECT * FROM logg ;";
+    $resultado = BasedeDatos::ejecutar($sentencia);
+
+    $arrayDevolucion = array();
+    
+    
+    while( $elemento = $resultado->fetch_assoc() ){
+        $incidencia = new Log($elemento['idLog'],$elemento['Usuario'],$elemento['Tipo'],$elemento['Fecha']);
+        array_push($arrayDevolucion,$incidencia);
+    }
+
+    return $arrayDevolucion;
+
 }
 
 function EliminarComentariosdeIncidencia($idIncidencia){

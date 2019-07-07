@@ -33,6 +33,7 @@
               <p class="card-text"><small class="text-muted">Titulo: {{ incidencia.getLugar}}</small></p>
               <p class="card-text"><small class="text-muted">Palabras clave: {{ incidencia.getPalabras}}</small></p>
               <p class="card-text">Descripcion: {{ incidencia.getDescripcion}}</p>
+              <p class="card-text">Estado: {{ incidencia.getEstado}}</p>
               <p class="card-text"><small class="text-muted">{{ incidencia.getFecha}} by {{incidencia.getIdUsuario}}</small></p>
               <p class="card-text"><small class="text-muted"> Likes: {{ incidencia.getLikes}}</small></p>
               <p class="card-text"><small class="text-muted"> Dislikes: {{ incidencia.getDislikes}}</small></p>
@@ -103,7 +104,7 @@
   
       </ul>
     {%endif%}
-    {% if tipo == "Colaborador" %}
+    {% if tipo == "Colaborador"%}
   
   <ul class="nav nav-pills">
           <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
@@ -122,10 +123,28 @@
   
       </ul>
     {%endif%}
+    {% if tipo == "Visitante"%}
+  
+  <ul class="nav nav-pills">
+          <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
+          <form form action="" class=Editar method="POST">
+            <label class="sr-only"  for="inlineFormInput">Usuario</label>
+            <input type="text" name="user"  readonly="readonly" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
+            
+            <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
+            <input type="password" name="Psw"  readonly="readonly" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+            <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
+            <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
+
+          </form>
+  
+      </ul>
+    {%endif%}
 
 
     {% if tipo != "Administrador" %}
       {% if tipo != "Colaborador" %}
+        {% if tipo != "Visitante" %}
     
       <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
@@ -141,6 +160,7 @@
       
           </ul>
       {%endif%}
+    {%endif%}
     {%endif%}
     
       {% endblock %}

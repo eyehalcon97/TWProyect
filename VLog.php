@@ -9,7 +9,9 @@
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
     session_start();
-    $argumentosTwig = ['tipo' => null , 'user' => null ];
+    $argumentosTwig = ['tipo' => null , 'user' => null , 'Log' => null ];
+    $Log= obtenerLog();
+    $argumentosTwig['Logs']=$Log;
 
     if(isset($_SESSION["Nombre"])){
 
@@ -35,7 +37,8 @@
             $argumentosTwig['tipo']=$tipo;
             $user = BuscarUsuario($Usuario);
             $argumentosTwig['user']=$user;
-            header("Location: ./index.php");
+            CrearLog($User,"Entrar");
+            header("Location: ./VLog.php");
         }
 
     }
@@ -43,6 +46,7 @@
         header("Location: ./CUsuario.php");
     }
     if( isset($_POST['Salir'])){
+        CrearLog($_SESSION["Nombre"],"Salir");
         if(session_status()==PHP_SESSION_NONE){
             session_start();
         } 
