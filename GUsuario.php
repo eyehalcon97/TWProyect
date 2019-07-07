@@ -67,6 +67,7 @@
         $id = $_POST['id'];
         
         EliminarUsuarioporid($id);
+        header("Location: ./GUsuario.php");
         
     }
     

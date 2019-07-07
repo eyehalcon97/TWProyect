@@ -20,7 +20,7 @@
     //$Usuario ="eyehalcon97";
     //$id = getidusuario($Usuario);
     //$tipo = getipousuario($id);
-    $argumentosTwig = ['incidencias' => $incidencias ,'comentarios' => $comentarios , 'user ' => null ];
+    $argumentosTwig = ['incidencias' => $incidencias ,'comentarios' => $comentarios , 'user ' => null ,'tipo' => null ];
 
     if(isset($_SESSION["Nombre"])){
 
@@ -74,16 +74,19 @@
     if( isset($_POST['Like'])){
         $id = $_POST['id'];
         Like($id);
+        header("Location: ./index.php");
     }
     if( isset($_POST['Dislike'])){
         $id = $_POST['id'];
         Dislike($id);
+        header("Location: ./index.php");
     }
 
 
     if( isset($_POST['Eliminar'])){
         $id = $_POST['id'];
-        EliminarIncidenciaporid($id); 
+        EliminarIncidenciaporid($id);
+        header("Location: ./index.php"); 
     }
     
 

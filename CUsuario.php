@@ -23,7 +23,7 @@
          $Usuario = $_POST['User'];
          $Ciudad = $_POST['Ciudad'];
          $Pais = $_POST['Pais'];
-         $Tipo = "Administrador";
+         $Tipo = "Colaborador";
          $Estado = "SinVerificar";
          $Foto = $_POST['Foto'];
 
@@ -32,6 +32,24 @@
         
 
         
+    }
+    if( isset($_POST['Entrar'])){
+        $User = $_POST['user'];
+        $Psw = $_POST['Psw'];
+        $inicio = IniciarSesion($User,$Psw);
+        
+        if($inicio == true){
+            echo "entro";
+            $_SESSION["Nombre"] = $User;
+            $Usuario =$_SESSION["Nombre"];
+            $id = getidusuario($Usuario);
+            $tipo = getipousuario($id);
+            $argumentosTwig['tipo']=$tipo;
+            $user = BuscarUsuario($Usuario);
+            $argumentosTwig['user']=$user;
+            header("Location: ./index.php");
+        }
+
     }
 
     $template = $twig->load('/html/CUsuario.html');

@@ -20,6 +20,7 @@
         $idIncidencia = $_POST['id'];
         $incidencia = getincidenciaporid($idIncidencia);
         $argumentosTwig['incidencia']=$incidencia;
+    }
         
     
         if(isset($_SESSION["Nombre"])){

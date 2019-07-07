@@ -75,7 +75,11 @@
     if( isset($_POST['comentar'])){
         $comentario = $_POST['comentario'];
         $id = $_POST['id'];
-        
+        if(isset($_SESSION["Nombre"])){
+            $Usuario = $_SESSION["Nombre"];
+        }else{
+            $Usuario = "Anonimo";
+        }
         CrearComentario($id,$Usuario,$comentario);
         header("Location: ./index.php");
     }
@@ -88,11 +92,9 @@
     }
 
     
-    if($argumentosTwig['tipo'] != "Administrador"  && $argumentosTwig['tipo'] != "Colaborador"){
-        $template = $twig->load('/html/Error.html');
-    }else{
+    
     $template = $twig->load('/html/Comentar.html');
-    }
+    
     echo $template->render($argumentosTwig);
     
 

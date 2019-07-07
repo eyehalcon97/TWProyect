@@ -65,7 +65,7 @@
 
          
         CrearIncidencia($_POST['Titulo'],$_POST['Descripcion'],$_POST['Lugar'],$Usuario,"Pendiente",0,0,null,$_POST['Palabras']);
-        
+        header("Location: ./index.php");
         
 
         

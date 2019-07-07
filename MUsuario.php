@@ -12,7 +12,7 @@
     $twig = new \Twig\Environment($loader);
 
     
-    $argumentosTwig = ['tipo' => null , 'user' => null];
+    $argumentosTwig = ['tipo' => null , 'user' => null , 'userad' => null];
 
     if(isset($_SESSION["Nombre"])){
 
@@ -22,6 +22,7 @@
         $argumentosTwig['tipo']=$tipo;
         $user = BuscarUsuario($Usuario);
         $argumentosTwig['user']=$user;
+        $argumentosTwig['userad'] =$user;
     }
     
     if( isset($_POST['Entrar'])){
@@ -38,6 +39,7 @@
             $argumentosTwig['tipo']=$tipo;
             $user = BuscarUsuario($Usuario);
             $argumentosTwig['user']=$user;
+            $argumentosTwig['userad'] =$user;
             header("Location: ./index.php");
         }
 
@@ -70,7 +72,6 @@
         
         $argumentosTwig['user']=$Usuario;
 
-        
 
     }
 
@@ -91,6 +92,7 @@
 
 
        ModificarUsuario($id,$Nombre,$Papellido,$Sapellido,$Psw,$email,$User,$Ciudad,$Pais,$Tipo,$Estado,$Foto);
+       header("Location: ./MUsuario.php");
        
        
 

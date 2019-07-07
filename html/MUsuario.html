@@ -9,7 +9,7 @@
         <div class=CUsuario>
         <img src="./html/images/login.png" alt="" height="60" width="60" class="foto">
         <section class="articulo">
-            <h1>{{usuario.getNombre}}</h1>
+            <h1>{{user.getUsuario}}</h1>
             <form action="" method="POST"> 
                 <div class="form-group">
                 <label for="exampleFormControlFile1">Foto de Perfil</label>
@@ -32,23 +32,21 @@
                     <label for="validationDefaultUsername">Nombre de Usuario</label>
                       <input type="text" name="User" class="form-control" id="validationDefaultUsername" placeholder="Nombre de Usuario" aria-describedby="inputGroupPrepend2" value={{user.getUsuario}} required>
                   </div>
-                  <div class="form-group row">
-                    <label for="form-email" class="col-sm-2 col-form-label">E-mail:  </label>
-                    <div class="col-sm-10">
-                      <input type="email" name="Email" id="form-email"  value={{user.getEmail}} required>
-                    </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationDefault03">E-mail</label>
+                    <input type="email" name="Psw" class="form-control" id="form-pass1" name="Email" value={{user.getEmail}} required >
                   </div>
-                  <div class="form-group row">
-                    <label for="form-email1"  class="col-sm-2 col-form-label">Contraseña</label>
-                    <div class="col-sm-5">
-                      <input type="password" name="Psw" class="form-control" id="form-pass1" name="pass" placeholder="Password" value={{user.getPsw}} required >
+                  <div class="col-md-3 mb-3">
+                    <label for="validationDefault04">Contraseña</label>
+                    <input type="password" name="Psw" class="form-control" id="form-pass1" name="pass" placeholder="Password" value={{user.getPsw}} required >
                       <p id="msgErrorPass" hidden></p>
-                    </div>
-                    <div class="col-sm-5">
-                      <input type="password" name="CPsw" class="form-control" id="form-pass2" name="pass-confirm" placeholder="Confirmar" value={{user.getPsw}} required>
-                    </div>
-                </div>
-                </div>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <label for="validationDefault04">Contraseña 2</label>
+                    <input type="password" name="CPsw" class="form-control" id="form-pass2" name="pass-confirm" placeholder="Confirmar" value={{user.getPsw}} required>
+                  </div>
                 <div class="form-row">
                   <div class="col-md-6 mb-3">
                     <label for="validationDefault03">Ciudad</label>
@@ -58,6 +56,8 @@
                     <label for="validationDefault04">Pais</label>
                     <input type="text" name="Pais" class="form-control" id="validationDefault04" placeholder="Pais"value={{user.getPais}} required>
                   </div>
+                </div>
+                {%if userad.getTipo == "Administrador"%}
                   <div class="form-row">
                       <div class="col-md-6 mb-3">
                         <label for="validationDefault03">Estado</label>
@@ -67,6 +67,20 @@
                         <label for="validationDefault04">Tipo</label>
                         <input type="text" name="Tipo" class="form-control" id="validationDefault04" placeholder="Tipo"value={{user.getTipo}} required>
                       </div>
+                  </div>
+                  {%endif%}
+                  {%if userad.getTipo != "Administrador"%}
+                  <div class="form-row">
+                      <div class="col-md-6 mb-3">
+                        <label for="validationDefault03">Estado</label>
+                        <input type="text" name="Estado" class="form-control" id="validationDefault03" placeholder="Estado"  readonly="readonly" value={{user.getEstado}}    required>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="validationDefault04">Tipo</label>
+                        <input type="text" name="Tipo" class="form-control" id="validationDefault04" placeholder="Tipo"value={{user.getTipo}}  readonly="readonly" required>
+                      </div>
+                  </div>
+                  {%endif%}
         
 
                 <button class="btn btn-primary" type="submit" name="btnModificar">Modificar</button>
@@ -93,9 +107,9 @@
           <li class="nav-item"><a class="nav-link" href="./GBD.php">Gestion de Base de Datos</a></li>
           <form form action="" class=Editar method="POST">
               <label class="sr-only"  for="inlineFormInput">Usuario</label>
-              <input type="text" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
+              <input type="text"  readonly="readonly" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
               <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-              <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+              <input type="password"  readonly="readonly" name="Psw" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
               <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
               <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
 
@@ -111,10 +125,10 @@
           <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
           <form form action="" class=Editar method="POST">
             <label class="sr-only"  for="inlineFormInput">Usuario</label>
-            <input type="text" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
+            <input type="text" name="user"  readonly="readonly" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
             
             <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-            <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+            <input type="password" name="Psw"  readonly="readonly" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
             <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
             <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
 
@@ -131,9 +145,9 @@
               <li class="nav-item"><a class="nav-link" href="./index.php">Ver Incidencias</a></li>
               <form form action="" class=Editar method="POST">
                   <label class="sr-only"  for="inlineFormInput">Usuario</label>
-                  <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
-                  <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-                  <input type="text" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+                  <input type="text" name="user" class="form-control" id="inlineFormInput" value="Usuario">
+                  <label class="sr-only"   for="inlineFormInputGroup">Contraseña</label>
+                  <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
                   <button type="submit" name="Entrar" class="btn btn-primary mb-2">Entrar</button>
                   <button type="submit" name="Crear" class="btn btn-primary mb-2">Crear</button>
     

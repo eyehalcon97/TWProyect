@@ -11,7 +11,7 @@
     
 
 
-    $argumentosTwig = ['incidencias' => null , 'tipo' => null , 'user' => null];
+    $argumentosTwig = ['incidencias' => null ,'nincidencias' =>null, 'tipo' => null , 'user' => null];
 
     if(isset($_SESSION["Nombre"])){
 
@@ -20,7 +20,12 @@
         $tipo = getipousuario($id);
         $argumentosTwig['tipo']=$tipo;
         $user = BuscarUsuario($Usuario);
+
+        $incidencias = getincidenciaUsuario($Usuario);
+        $nincidencias =obtenernumeroIncidenciasUsuario($Usuario);
         $argumentosTwig['user']=$user;
+        $argumentosTwig['incidencias']=$incidencias;
+        $argumentosTwig['nincidencias']=$nincidencias;
     }
     
     if( isset($_POST['Entrar'])){
@@ -59,6 +64,26 @@
     if( isset($_POST['MUsuario'])){
         header("Location: ./MUsuario.php");
     }
+
+
+    if( isset($_POST['Like'])){
+        $id = $_POST['id'];
+        Like($id);
+        header("Location: ./MIncidencia.php");
+    }
+    if( isset($_POST['Dislike'])){
+        $id = $_POST['id'];
+        Dislike($id);
+        header("Location: ./MIncidencia.php");
+    }
+
+
+    if( isset($_POST['Eliminar'])){
+        $id = $_POST['id'];
+        EliminarIncidenciaporid($id);
+        header("Location: ./MIncidencia.php"); 
+    }
+    
     
 
     $loader = new \Twig\Loader\FilesystemLoader('.');

@@ -260,7 +260,7 @@ function ObtenerTodosComentariosdetodo(){
 }
 
 function ObtenerTodosUsuarios(){
-    $sentencia= "SELECT * FROM usuarios;";
+    $sentencia= "SELECT * FROM usuarios WHERE Usuario != 'Anonimo' ;";
     $resultado = BasedeDatos::ejecutar($sentencia);
 
     $arrayDevolucion = array();

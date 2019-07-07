@@ -51,16 +51,24 @@
             <input  type="hidden" class="form-control"name=id value= {{incidencia.getId}} required>
             <button class="btn btn-primary" type="submit" name="Like">Like</button>
             <button class="btn btn-primary" type="submit" name="Dislike">Dislike</button>
+            
+            {% if (user.getUsuario == incidencia.IdUsuario or user.getTipo == "Administrador") %}
             <button class="btn btn-primary" type="submit" name="Eliminar">Eliminar</button>
-        </form>
-        <form action="./editar.php" class=Editar method="POST" >
-          <input  type="hidden" class="form-control"name=id value= {{incidencia.getId}} required>
-            <button class="btn btn-primary" type="submit" name="Editar">Editar</button>
+            {% endif %}
         </form>
         <form action="./comentar.php" class=Editar method="POST" >
           <input  type="hidden" class="form-control"name=id value= {{incidencia.getId}} required>
             <button class="btn btn-primary" type="submit" name="Comentario">Comentar</button>
         </form>
+
+        {% if (user.getUsuario == incidencia.IdUsuario or user.getTipo == "Administrador") %}
+        <form action="./editar.php" class=Editar method="POST" >
+          <input  type="hidden" class="form-control"name=id value= {{incidencia.getId}} required>
+            <button class="btn btn-primary" type="submit" name="Editar">Editar</button>
+        </form>
+        {% endif %}
+        
+        
       </div>
     </div>
   </div>
@@ -85,9 +93,9 @@
           <li class="nav-item"><a class="nav-link" href="./GBD.php">Gestion de Base de Datos</a></li>
           <form form action="" class=Editar method="POST">
               <label class="sr-only"  for="inlineFormInput">Usuario</label>
-              <input type="text" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
+              <input type="text"  readonly="readonly" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
               <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-              <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+              <input type="password"  readonly="readonly" name="Psw" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
               <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
               <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
 
@@ -103,10 +111,10 @@
           <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
           <form form action="" class=Editar method="POST">
             <label class="sr-only"  for="inlineFormInput">Usuario</label>
-            <input type="text" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
+            <input type="text" name="user"  readonly="readonly" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
             
             <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-            <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
+            <input type="password" name="Psw"  readonly="readonly" class="form-control" id="inlineFormInputGroup" value={{user.getPsw}}>
             <button type="submit" name="MUsuario" class="btn btn-primary mb-2">Editar</button>
             <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
 
@@ -123,9 +131,9 @@
               <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
               <form form action="" class=Editar method="POST">
                   <label class="sr-only"  for="inlineFormInput">Usuario</label>
-                  <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
-                  <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
-                  <input type="text" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+                  <input type="text" name="user" class="form-control" id="inlineFormInput" value="Usuario">
+                  <label class="sr-only"   for="inlineFormInputGroup">Contraseña</label>
+                  <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
                   <button type="submit" name="Entrar" class="btn btn-primary mb-2">Entrar</button>
                   <button type="submit" name="Crear" class="btn btn-primary mb-2">Crear</button>
     
