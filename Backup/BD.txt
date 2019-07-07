@@ -1,0 +1,74 @@
+DROP TABLE comentarios;
+\   nCREATE TABLE `comentarios` (
+  `idComentario` int(11) NOT NULL AUTO_INCREMENT,
+  `idIncidencia` int(11) NOT NULL,
+  `idusuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `comentario` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`idComentario`),
+  KEY `incidenciacomentario` (`idIncidencia`),
+  KEY `usuario` (`idusuario`),
+  CONSTRAINT `incidenciacomentario` FOREIGN KEY (`idIncidencia`) REFERENCES `incidencias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `usuario` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+\  nINSERT INTO comentarios VALUES("46","27","Visitante","2019-07-07 17:51:57","Comentarrere");\   nINSERT INTO comentarios VALUES("47","27","Administrador","2019-07-07 20:08:05","Comentarhtrehtr");\   nINSERT INTO comentarios VALUES("48","27","Administrador","2019-07-07 20:09:30","Comentarwetrwtre");\   nINSERT INTO comentarios VALUES("49","27","Administrador","2019-07-07 20:09:39","Comentargwegerw");\   nINSERT INTO comentarios VALUES("50","27","Administrador","2019-07-07 20:10:38","Comentargrew");\   nINSERT INTO comentarios VALUES("51","27","Administrador","2019-07-07 20:11:40","Comentartwetrew");\   nINSERT INTO comentarios VALUES("52","27","Administrador","2019-07-07 20:12:25","Comentargewr");\   nINSERT INTO comentarios VALUES("53","28","Administrador","2019-07-07 20:13:21","Comentargrewgerw");\   nINSERT INTO comentarios VALUES("54","28","Administrador","2019-07-07 20:13:28","Comentargrew");\   n
+
+
+DROP TABLE incidencias;
+\   nCREATE TABLE `incidencias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(512) COLLATE utf8_spanish_ci NOT NULL,
+  `lugar` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idUsuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` enum('Pendiente','Comprobada','Tramitada','Irresoluble','Resuelta') COLLATE utf8_spanish_ci NOT NULL,
+  `likes` int(11) NOT NULL,
+  `dislikes` int(11) NOT NULL,
+  `Foto` varchar(256) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Palabras` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `titulo` (`titulo`),
+  KEY `Idusuario` (`idUsuario`),
+  CONSTRAINT `Idusuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+\  nINSERT INTO incidencias VALUES("27","Farola rota","Hace unos dias una de las farolas de la piscina se rompi","piscina","2019-07-07 14:05:31","Colaborador","Pendiente","2","2","","farola piscina");\   nINSERT INTO incidencias VALUES("28","Titulorewrwe","Descripcion","Lugar","2019-07-07 18:33:34","Administrador","Pendiente","0","2","","Palabras");\   nINSERT INTO incidencias VALUES("29","Titulotrgtrgtr","Descripcion","Lugar","2019-07-07 20:22:43","Administrador","Pendiente","0","0","","Palabras");\   n
+
+
+DROP TABLE logg;
+\   nCREATE TABLE `logg` (
+  `idLog` int(20) NOT NULL AUTO_INCREMENT,
+  `Usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `Tipo` enum('Entrar','Salir','','') COLLATE utf8_spanish_ci NOT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idLog`),
+  KEY `Usuario` (`Usuario`),
+  CONSTRAINT `user` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+\  nINSERT INTO logg VALUES("3","Administrador","Entrar","2019-07-07 15:06:36");\   nINSERT INTO logg VALUES("5","Administrador","Entrar","2019-07-07 15:07:41");\   nINSERT INTO logg VALUES("6","Administrador","Salir","2019-07-07 15:07:42");\   nINSERT INTO logg VALUES("7","Administrador","Entrar","2019-07-07 15:11:23");\   nINSERT INTO logg VALUES("8","Administrador","Salir","2019-07-07 15:19:12");\   nINSERT INTO logg VALUES("9","Administrador","Entrar","2019-07-07 15:22:49");\   nINSERT INTO logg VALUES("10","Administrador","Salir","2019-07-07 15:23:04");\   nINSERT INTO logg VALUES("11","Administrador","Entrar","2019-07-07 15:25:52");\   nINSERT INTO logg VALUES("12","Administrador","Salir","2019-07-07 15:25:56");\   nINSERT INTO logg VALUES("13","Visitante","Entrar","2019-07-07 16:07:17");\   nINSERT INTO logg VALUES("14","Visitante","Entrar","2019-07-07 16:07:34");\   nINSERT INTO logg VALUES("15","Visitante","Salir","2019-07-07 16:13:18");\   nINSERT INTO logg VALUES("16","Visitante","Entrar","2019-07-07 16:13:29");\   nINSERT INTO logg VALUES("17","Visitante","Salir","2019-07-07 16:16:36");\   nINSERT INTO logg VALUES("18","Administrador","Entrar","2019-07-07 16:18:32");\   nINSERT INTO logg VALUES("19","Administrador","Salir","2019-07-07 17:51:33");\   nINSERT INTO logg VALUES("20","Visitante","Entrar","2019-07-07 17:51:50");\   nINSERT INTO logg VALUES("21","Visitante","Salir","2019-07-07 17:52:25");\   nINSERT INTO logg VALUES("22","Administrador","Entrar","2019-07-07 17:52:34");\   nINSERT INTO logg VALUES("23","Administrador","Salir","2019-07-07 19:41:58");\   nINSERT INTO logg VALUES("24","Administrador","Entrar","2019-07-07 20:07:59");\   nINSERT INTO logg VALUES("25","Administrador","Salir","2019-07-07 20:54:33");\   nINSERT INTO logg VALUES("26","Administrador","Entrar","2019-07-07 20:58:01");\   n
+
+
+DROP TABLE usuarios;
+\   nCREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  `Papellido` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  `Sapellido` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  `Psw` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  `Usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `Ciudad` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  `Pais` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
+  `Tipo` enum('Visitante','Colaborador','Administrador') COLLATE utf8_spanish_ci NOT NULL,
+  `Estado` enum('Activo','SinVerificar') COLLATE utf8_spanish_ci NOT NULL,
+  `Foto` varchar(256) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Votos` int(11) NOT NULL,
+  `Reportes` int(11) NOT NULL,
+  `Comentarios` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Usuario` (`Usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+\  nINSERT INTO usuarios VALUES("1","","","","","","Anonimo","","","","","","0","0","0");\   nINSERT INTO usuarios VALUES("9","Colaborador","Ottofe","fewfw","few","eyehalcon97@fffdds","colaborador","fewfwefwe","efewfwe","Colaborador","SinVerificar","","0","0","0");\   nINSERT INTO usuarios VALUES("10","Administrador","Ottogregre","greger","few","eyehalcon97@ggfg","Administrador","erwrwereww","werewrewrwe","Administrador","Activo","","1","2","1");\   nINSERT INTO usuarios VALUES("11","Visitante","Otto","few`","few","gnfeiwkngew@efw","Visitante","gmfkew few","few","Visitante","SinVerificar","","0","0","0");\   nINSERT INTO usuarios VALUES("12","Markytre","Ottoeyrt","htre","grew","ehtre@gre","htre","gwer","grew","Visitante","SinVerificar","","0","0","0");\   n
+
+
+

@@ -32,13 +32,13 @@
                         <input type="text" name ="Lugar" class="form-control" id="validationDefault02" placeholder="Lugar" value={{incidencia.getLugar}} required>
                       </div>
 
-                      {%if userad.getTipo == "Administrador"%}
+                      {%if user.getTipo == "Administrador"%}
                       <div class="col-md-4 mb-3">
                             <label for="validationDefault02">Estado</label>
                             <input type="text" name ="Estado" class="form-control" id="validationDefault02" placeholder="Lugar" value={{incidencia.getEstado}} required>
                           </div>
                       {% endif %}
-                      {%if userad.getTipo != "Administrador"%}
+                      {%if user.getTipo != "Administrador"%}
                       <div class="col-md-4 mb-3">
                             <label for="validationDefault02">Estado</label>
                             <input type="text" name ="Estado" class="form-control" id="validationDefault02" placeholder="Lugar" readonly="readonly" value={{incidencia.getEstado}} required>

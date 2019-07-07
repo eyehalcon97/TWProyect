@@ -618,7 +618,7 @@ function salvar(){
                 $salida .= ");\   n"; }$salida .= "\n\n\n";
             }
 
-            var_dump($salida);
+            return $salida;
 
 }
 

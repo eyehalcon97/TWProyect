@@ -58,7 +58,14 @@
         header("Location: ./index.php");
     }
     if( isset($_POST['Salvar'])){
-        salvar();
+        $salvar = salvar();
+        $fp = fopen("./Backup/BD.txt" , "r+" );
+        fwrite($fp, $salvar . PHP_EOL);
+        fclose($fp);  
+        header ("Content-Disposition: attachment; filename=./Backup/BD.txt");
+        header ("Content-Type: application/force-download");
+        header ("Content-Length: ".filesize("./Backup/BD.txt"));
+        readfile("./Backup/BD.sql");
 
     }
     if( isset($_POST['MUsuario'])){
