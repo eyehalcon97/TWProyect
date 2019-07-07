@@ -21,9 +21,9 @@ require_once'./php/Log.php';
 //echo $user;
 
 
-function CrearUsuario($nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto){
-    $sentencia = "INSERT INTO usuarios(nombre,Papellido,Sapellido,Psw,email,Usuario,Ciudad,Pais,Tipo,Estado,Foto)
-    VALUES ('$nombre','$Papellido','$Sapellido','$Psw','$email','$Usuario','$Ciudad','$Pais','$Tipo','$Estado','$Foto');";
+function CrearUsuario($nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto,$Votos){
+    $sentencia = "INSERT INTO usuarios(nombre,Papellido,Sapellido,Psw,email,Usuario,Ciudad,Pais,Tipo,Estado,Foto,Votos)
+    VALUES ('$nombre','$Papellido','$Sapellido','$Psw','$email','$Usuario','$Ciudad','$Pais','$Tipo','$Estado','$Foto','$Votos');";
     BasedeDatos::ejecutar($sentencia);
 }
 
@@ -42,6 +42,37 @@ function CrearLog($Usuario,$Tipo){
     $sentencia = "INSERT INTO logg(Usuario,Tipo)
     VALUES ('$Usuario','$Tipo');";
     BasedeDatos::ejecutar($sentencia);
+}
+
+function ObtenerTodasIncidenciasFiltro($valor){
+    $sentencia =null;
+    
+    if($valor == "positiva"){
+
+        $sentencia= "SELECT * FROM incidencias ORDER BY likes DESC;";
+    }
+    if($valor == "netas"){
+
+        $sentencia= "SELECT * FROM incidencias ORDER BY (likes-dislikes) DESC;";
+    }
+    if($valor == "antiguedad"){
+ 
+        $sentencia= "SELECT * FROM incidencias ORDER BY fecha DESC;";
+    }
+    
+    
+    $resultado = BasedeDatos::ejecutar($sentencia);
+
+    $arrayDevolucion = array();
+    
+    
+    while( $elemento = $resultado->fetch_assoc() ){
+        $incidencia = new Incidencia($elemento['id'],$elemento['titulo'],$elemento['descripcion'],$elemento['lugar'],$elemento['fecha'],$elemento['idUsuario'],$elemento['estado'],$elemento['likes'],$elemento['dislikes'],$elemento['Foto'],$elemento['Palabras']);
+        array_push($arrayDevolucion,$incidencia);
+    }
+
+    
+    return $arrayDevolucion;
 }
 function obtenerLog(){
     $sentencia= "SELECT * FROM logg ;";
@@ -289,7 +320,7 @@ function ObtenerTodosUsuarios(){
     
     while( $elemento = $resultado->fetch_assoc() ){
         
-        $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Conexion']);
+        $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos']);
         array_push($arrayDevolucion,$usuario);
     }
     //echo $arrayDevolucion;
@@ -344,7 +375,7 @@ function getComentarios($IdIncidencia){
     
     
     while( $elemento = $resultado->fetch_assoc() ){
-        $comentario = new Comentario($elemento['idComentario'],$elemento['idIncidencia'],$elemento['idUsuario'],$elemento['fecha'],$elemento['comentario'],);
+        $comentario = new Comentario($elemento['idComentario'],$elemento['idIncidencia'],$elemento['idUsuario'],$elemento['fecha'],$elemento['comentario']);
         array_push($arrayDevolucion,$comentario);
     }
     //echo $arrayDevolucion;
@@ -360,7 +391,7 @@ function BuscarUsuario($Usuario){
     
     
     $elemento = $resultado->fetch_assoc();
-    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Conexion']);
+    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos']);
         
     
 
@@ -376,7 +407,7 @@ function obtenerUsuarioporId($idUsuario){
     
     
     $elemento = $resultado->fetch_assoc();
-    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Conexion']);
+    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Votos']);
         
     
 

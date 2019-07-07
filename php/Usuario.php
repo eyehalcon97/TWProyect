@@ -15,9 +15,10 @@ class Usuario {
     private $Tipo;
     private $Estado;
     private $Fotos;
-    private $Conexion;
+    private $Votos;
+
     
-    function __construct($Id,$Nombre,$Papellido,$Sapellido,$Psw,$Email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Fotos,$Conexion){
+    function __construct($Id,$Nombre,$Papellido,$Sapellido,$Psw,$Email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Fotos,$Votos){
     $this->Id = $Id;
     $this->Nombre=$Nombre;
     $this->Papellido=$Papellido;
@@ -30,7 +31,8 @@ class Usuario {
     $this->Tipo=$Tipo;
     $this->Estado=$Estado;
     $this->Fotos=$Fotos;
-    $this->Conexion=$Conexion;
+    $this->Votos=$Votos;
+   
     }
 
     function getId(){
@@ -69,8 +71,8 @@ class Usuario {
     function getFotos(){
         return $this->Fotos;
     }
-    function getConexion(){
-        return $this->Conexion;
+    function getVotos(){
+        return $this->Votos;
     }
    
 }

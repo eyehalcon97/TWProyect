@@ -26,8 +26,9 @@
          $Tipo = "Visitante";
          $Estado = "SinVerificar";
          $Foto = $_POST['Foto'];
+         $Votos = 0;
 
-        CrearUsuario($Nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto);
+        CrearUsuario($Nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto,$Votos);
         
         
 

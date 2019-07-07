@@ -2,12 +2,16 @@
 
 {% block lista %}
 <div id="list-example" class="list-group">
-    <h2>Contenidos</h2>
-    {% for n in nincidencia %}
-    {% set numero = '# : n' %}
-    <a class="list-group-item list-group-item-action" href= " {{ numero.href }} " >Item 1</a>
-    {% endfor %}
+    <h2>Busquedas</h2>
+
     
+    <form action="" class="posi" method="POST"> 
+        <button type="submit" name="netas" class="btn btn-primary">Visualizar positivas netas</button>
+        <button type="submit" name="positiva" class="btn btn-primary">Visualizar positivas</button>
+        <button type="submit" name="antiguedad" class="btn btn-primary">Visualizar por antiguedad</button>
+
+    </form>
+
 
   </div>
 {% endblock %}
@@ -92,7 +96,7 @@
           <li class="nav-item"><a class="nav-link" href="./GUsuario.php">Gestion de Usuario</a></li>
           <li class="nav-item"><a class="nav-link" href="./VLog.php">Ver Log</a></li>
           <li class="nav-item"><a class="nav-link" href="./GBD.php">Gestion de Base de Datos</a></li>
-          <form form action="" class=Editar method="POST">
+          <form form action="" class="Editar" method="POST">
               <label class="sr-only"  for="inlineFormInput">Usuario</label>
               <input type="text"  readonly="readonly" name="user" class="form-control" id="inlineFormInput" value={{user.getUsuario}}>
               <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>

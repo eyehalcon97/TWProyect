@@ -66,6 +66,27 @@
         session_destroy();
         header("Location: ./index.php");
     }
+    
+    if( isset($_POST['positiva'])){
+
+        $incidencias = ObtenerTodasIncidenciasFiltro("positiva");
+        $argumentosTwig['incidencias']=$incidencias;
+        //header("Location: ./index.php");
+    }
+
+    if( isset($_POST['netas'])){
+
+        $incidencias = ObtenerTodasIncidenciasFiltro("netas");
+        $argumentosTwig['incidencias']=$incidencias;
+        //header("Location: ./index.php");
+    }
+
+    if( isset($_POST['antiguedad'])){
+
+        $incidencias = ObtenerTodasIncidenciasFiltro("antiguedad");
+        $argumentosTwig['incidencias']=$incidencias;
+        //header("Location: ./index.php");
+    }
 
     if( isset($_POST['MUsuario'])){
         header("Location: ./MUsuario.php");
