@@ -42,14 +42,15 @@
         <h4>Comentarios:</h4>
         {% for comentario in comentarios %}
         <p class="card-text"> {{ comentario.getComentario}}</p>
-        
+       
         <form action="" class=Editar method="POST"> 
                 <input type="hidden"  class="form-control"name="id" value={{comentario.getidComentario}} required>
-                
+                {% if (user.getUsuario == incidencia.IdUsuario or user.getTipo == "Administrador") %}
                 <button class="btn btn-primary" type="submit" name="Eliminar">Eliminar</button>
+                {% endif %}
             </form>
         <p class="card-text"><small class="text-muted">{{ comentario.getFecha}} by {{comentario.getidUsuario}}</small></p>
-
+        
         
         {% endfor %}
         

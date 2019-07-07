@@ -118,6 +118,7 @@
         EliminarIncidenciaporid($id);
         header("Location: ./index.php"); 
     }
+    
 
 
 

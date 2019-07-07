@@ -57,7 +57,10 @@
         session_destroy();
         header("Location: ./index.php");
     }
+    if( isset($_POST['Salvar'])){
+        salvar();
 
+    }
     if( isset($_POST['MUsuario'])){
         header("Location: ./MUsuario.php");
     }
