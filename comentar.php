@@ -84,9 +84,8 @@
         }
         CrearComentario($id,$Usuario,$comentario);
         
-        UsuarioComentario($id);
-        echo "goa";
-
+        UsuarioComentario($_SESSION["Nombre"]);
+      
         header("Location: ./index.php");
     }
 

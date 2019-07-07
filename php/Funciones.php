@@ -568,9 +568,35 @@ function getUsuarioComentario($id){
     $elemento = $resultado->fetch_assoc();
     return $elemento['Comentarios'];
 }
+function UsuarioReporte($id){
+    $numero = getUsuarioComentario($id);
+    $num = $numero +1;
+    $sentencia = "UPDATE usuarios SET Reportes='$num' where Usuario = '$id' ;";
+    BasedeDAtos::ejecutar($sentencia);
 
+}
 
+function getUsuarioReporte($id){
+    $sentencia= "SELECT Reportes FROM usuarios WHERE Usuario = '$id';";
+    $resultado = BasedeDAtos::ejecutar($sentencia);
+    $elemento = $resultado->fetch_assoc();
+    return $elemento['Reportes'];
+}
 
+function UsuarioVoto($id){
+    $numero = getUsuarioVoto($id);
+    $num = $numero +1;
+    $sentencia = "UPDATE usuarios SET Votos='$num' where Usuario = '$id' ;";
+    BasedeDAtos::ejecutar($sentencia);
+
+}
+
+function getUsuarioVoto($id){
+    $sentencia= "SELECT Votos FROM usuarios WHERE Usuario = '$id';";
+    $resultado = BasedeDAtos::ejecutar($sentencia);
+    $elemento = $resultado->fetch_assoc();
+    return $elemento['Votos'];
+}
 
 
 ?>

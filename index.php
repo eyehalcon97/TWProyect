@@ -97,11 +97,18 @@
     if( isset($_POST['Like'])){
         $id = $_POST['id'];
         Like($id);
+        if(isset($_SESSION["Nombre"])){
+        UsuarioVoto($_SESSION["Nombre"]);
+        }
+
         header("Location: ./index.php");
     }
     if( isset($_POST['Dislike'])){
         $id = $_POST['id'];
         Dislike($id);
+        if(isset($_SESSION["Nombre"])){
+        UsuarioVoto($_SESSION["Nombre"]);
+        }
         header("Location: ./index.php");
     }
 
