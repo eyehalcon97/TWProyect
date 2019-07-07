@@ -68,9 +68,27 @@
         readfile("./Backup/BD.sql");
 
     }
+
+
+    if( isset($_POST['Pdf'])){
+
+        header ("Content-Disposition: attachment; filename=./Pdf/Pdf.PDF");
+        header ("Content-Type: application/force-download");
+        header ("Content-Length: ".filesize("./Pdf/Pdf.PDF"));
+        readfile("./Pdf/Pdf.PDF");
+
+    }
+
+
     if( isset($_POST['MUsuario'])){
         header("Location: ./MUsuario.php");
     }
+    $Votos = ObtenerTopVotos();
+    $argumentosTwig['Votos']=$Votos;
+    $comentarios = ObtenerTopComentarios();
+    $argumentosTwig['Comentarios']=$comentarios;
+    $Reportes = ObtenerTopReportes();
+    $argumentosTwig['Reportes']=$Reportes;
     
     if($argumentosTwig['tipo'] != "Administrador"){
         $template = $twig->load('/html/Error.html');

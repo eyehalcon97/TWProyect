@@ -93,7 +93,12 @@
         ModificarIncidencia($id,$Titulo,$Descripcion,$Lugar,$Estado,$Foto,$Palabras);
         header("Location: ./index.php");
     }
-
+    $Votos = ObtenerTopVotos();
+    $argumentosTwig['Votos']=$Votos;
+    $comentarios = ObtenerTopComentarios();
+    $argumentosTwig['Comentarios']=$comentarios;
+    $Reportes = ObtenerTopReportes();
+    $argumentosTwig['Reportes']=$Reportes;
     if($argumentosTwig['tipo'] != "Administrador"  && $argumentosTwig['tipo'] != "Colaborador"){
         $template = $twig->load('/html/Error.html');
     }else{

@@ -55,10 +55,18 @@
         }
 
     }
+    $Votos = ObtenerTopVotos();
+    $argumentosTwig['Votos']=$Votos;
+    $comentarios = ObtenerTopComentarios();
+    $argumentosTwig['Comentarios']=$comentarios;
+    $Reportes = ObtenerTopReportes();
+    $argumentosTwig['Reportes']=$Reportes;
+    
+
 
     $template = $twig->load('/html/CUsuario.html');
 
-    echo $template->render();
+    echo $template->render( $argumentosTwig);
     
 
 ?>

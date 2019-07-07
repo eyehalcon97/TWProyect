@@ -61,7 +61,12 @@
     if( isset($_POST['MUsuario'])){
         header("Location: ./MUsuario.php");
     }
-
+    $Votos = ObtenerTopVotos();
+    $argumentosTwig['Votos']=$Votos;
+    $comentarios = ObtenerTopComentarios();
+    $argumentosTwig['Comentarios']=$comentarios;
+    $Reportes = ObtenerTopReportes();
+    $argumentosTwig['Reportes']=$Reportes;
 
     if($argumentosTwig['tipo'] != "Administrador"){
         $template = $twig->load('/html/Error.html');

@@ -102,7 +102,12 @@
        
    }
 
-    
+   $Votos = ObtenerTopVotos();
+   $argumentosTwig['Votos']=$Votos;
+   $comentarios = ObtenerTopComentarios();
+   $argumentosTwig['Comentarios']=$comentarios;
+   $Reportes = ObtenerTopReportes();
+   $argumentosTwig['Reportes']=$Reportes;
     if($argumentosTwig['tipo'] != "Administrador" && $argumentosTwig['tipo'] != "Colaborador"  &&  $argumentosTwig['tipo'] != "Visitante" ){
         $template = $twig->load('/html/Error.html');
     }else{

@@ -67,12 +67,25 @@
 
     if( isset($_POST['Eliminar'])){
         $id = $_POST['id'];
+        $bool = PoderEliminarUsuario();
+        if($bool == true){
+            EliminarUsuarioporid($id);
+            header("Location: ./GUsuario.php");
+        }
+        else{
+            $template = $twig->load('/html/ErroEliminar.html');
+            echo $template->render($argumentosTwig);
+        }
+
         
-        EliminarUsuarioporid($id);
-        header("Location: ./GUsuario.php");
         
     }
-    
+    $Votos = ObtenerTopVotos();
+    $argumentosTwig['Votos']=$Votos;
+    $comentarios = ObtenerTopComentarios();
+    $argumentosTwig['Comentarios']=$comentarios;
+    $Reportes = ObtenerTopReportes();
+    $argumentosTwig['Reportes']=$Reportes;
     
     if($argumentosTwig['tipo'] != "Administrador"){
         $template = $twig->load('/html/Error.html');

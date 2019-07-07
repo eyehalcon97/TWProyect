@@ -90,7 +90,12 @@
 
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
-
+    $Votos = ObtenerTopVotos();
+    $argumentosTwig['Votos']=$Votos;
+    $comentarios = ObtenerTopComentarios();
+    $argumentosTwig['Comentarios']=$comentarios;
+    $Reportes = ObtenerTopReportes();
+    $argumentosTwig['Reportes']=$Reportes;
     
     if($argumentosTwig['tipo'] != "Administrador"  && $argumentosTwig['tipo'] != "Colaborador"){
         $template = $twig->load('/html/Error.html');

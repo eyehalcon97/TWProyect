@@ -622,5 +622,20 @@ function salvar(){
 
 }
 
+function PoderEliminarUsuario(){
+    $sentencia= "SELECT * FROM usuarios WHERE Tipo = 'Administrador';";
+    $resultado = BasedeDatos::ejecutar($sentencia);
+    $numero = $resultado->num_rows;
+    if($numero > 1){
+        
+        return true;
+    }
+    else{
+        
+        return false;
+    }
+
+}
+
 
 ?>
