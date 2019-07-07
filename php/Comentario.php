@@ -14,7 +14,7 @@ class Comentario {
     private $Comentario;
 
     function __construct($idComentario,$idIncidencia,$idUsuario,$Fecha,$Comentario){
-    $this->$idComentario = $idComentario;
+    $this->idComentario = $idComentario;
     $this->idIncidencia=$idIncidencia;
     $this->idUsuario=$idUsuario;
     $this->Fecha=$Fecha;

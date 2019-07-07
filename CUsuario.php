@@ -6,12 +6,11 @@
     require_once './vendor/autoload.php';
     require_once './php/funciones.php';
 
+    session_start();
+
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
 
-    $Usuario ="eyehalcon97";
-    $id = getidusuario($Usuario);
-    $tipo = getipousuario($id);
 
     if( isset($_POST['btnCrear'])){
 

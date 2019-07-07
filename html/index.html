@@ -30,41 +30,44 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{ incidencia.getTitulo }}</h5>
-              <p class="card-text"><small class="text-muted">{{ incidencia.getLugar}}</small></p>
-              <p class="card-text"> {{ incidencia.getDescripcion}}</p>
+              <p class="card-text"><small class="text-muted">Titulo: {{ incidencia.getLugar}}</small></p>
+              <p class="card-text"><small class="text-muted">Palabras clave: {{ incidencia.getPalabras}}</small></p>
+              <p class="card-text">Descripcion: {{ incidencia.getDescripcion}}</p>
               <p class="card-text"><small class="text-muted">{{ incidencia.getFecha}} by {{incidencia.getIdUsuario}}</small></p>
               <p class="card-text"><small class="text-muted"> Likes: {{ incidencia.getLikes}}</small></p>
               <p class="card-text"><small class="text-muted"> Dislikes: {{ incidencia.getDislikes}}</small></p>
-              <form action="" class=Editar method="POST"> 
-                  <input  class="form-control"name=id value= {{incidencia.getId}} required>
-                  <button class="btn btn-primary" type="submit" name="Like">Like</button>
-                  <button class="btn btn-primary" type="submit" name="Dislike">Dislike</button>
-                  <button class="btn btn-primary" type="submit" name="Editar">Editar</button>
-                  <button class="btn btn-primary" type="submit" name="Comentar">Comentar</button>
-                  <button class="btn btn-primary" type="submit" name="Eliminar">Eliminar</button>
-              </form>
+              
             </div>
           </div>
         </div>
+        <h4>Comentarios:</h4>
+        {% for comentario in comentarios %}
+        {% if  comentario.getidIncidencia == incidencia.getId  %}
+        <p class="card-text"> {{ comentario.getComentario}}</p>
+        <p class="card-text"><small class="text-muted">{{ comentario.getFecha}} by {{comentario.getidUsuario}}</small></p>
+        {% endif %}
+        {% endfor %}
+        <form action="" class=Editar method="POST"> 
+            <input  type="hidden" class="form-control"name=id value= {{incidencia.getId}} required>
+            <button class="btn btn-primary" type="submit" name="Like">Like</button>
+            <button class="btn btn-primary" type="submit" name="Dislike">Dislike</button>
+            <button class="btn btn-primary" type="submit" name="Eliminar">Eliminar</button>
+        </form>
+        <form action="./editar.php" class=Editar method="POST" >
+          <input  type="hidden" class="form-control"name=id value= {{incidencia.getId}} required>
+            <button class="btn btn-primary" type="submit" name="Editar">Editar</button>
+        </form>
+        <form action="./comentar.php" class=Editar method="POST" >
+          <input  type="hidden" class="form-control"name=id value= {{incidencia.getId}} required>
+            <button class="btn btn-primary" type="submit" name="Comentario">Comentar</button>
+        </form>
       </div>
     </div>
   </div>
         {% endfor %}
 
   
-      <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
+      
 
   {% endblock %}
 
@@ -80,13 +83,12 @@
           <li class="nav-item"><a class="nav-link" href="./GUsuario.php">Gestion de Usuario</a></li>
           <li class="nav-item"><a class="nav-link" href="./VLog.php">Ver Log</a></li>
           <li class="nav-item"><a class="nav-link" href="./GBD.php">Gestion de Base de Datos</a></li>
-          <form>
-              <label class="sr-only" for="inlineFormInput">Usuario</label>
-              <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe">
-              <label class="sr-only" for="inlineFormInputGroup">Contraseña</label>
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-              <button type="submit" class="btn btn-primary mb-2">Entrar</button>
-              <button type="submit" class="btn btn-primary mb-2"><a class ="CrearUsuario" href="./CUsuario.php">Crear</a></button>
+          <form form action="" class=Editar method="POST">
+              <label class="sr-only"  for="inlineFormInput">Usuario</label>
+              <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
+              <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
+              <input type="password" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+              <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
 
             </form>
   
@@ -98,13 +100,13 @@
           <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
           <li class="nav-item"><a class="nav-link" href="./NIncidencia.php">Nueva Incidencia</a></li>
           <li class="nav-item"><a class="nav-link" href="./MIncidencia.php">Mis Incidencia</a></li>
-          <form>
-              <label class="sr-only" for="inlineFormInput">Usuario</label>
-              <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe">
-              <label class="sr-only" for="inlineFormInputGroup">Contraseña</label>
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-              <button type="submit" class="btn btn-primary mb-2">Entrar</button>
-              <button type="submit" class="btn btn-primary mb-2"><a class ="CrearUsuario" href="./CUsuario.php">Crear</a></button>
+          <form form action="" class=Editar method="POST">
+              <label class="sr-only"  for="inlineFormInput">Usuario</label>
+              <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
+              <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
+              <input type="text" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+              <button type="submit" name="Salir" class="btn btn-primary mb-2">Salir</button>
+             
 
             </form>
   
@@ -117,14 +119,14 @@
     
       <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link active" href="./index.php">Ver Incidencias</a></li>
-              <form>
-                  <label class="sr-only" for="inlineFormInput">Usuario</label>
-                  <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe">
-                  <label class="sr-only" for="inlineFormInputGroup">Contraseña</label>
-                  <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-                  <button type="submit" class="btn btn-primary mb-2">Entrar</button>
+              <form form action="" class=Editar method="POST">
+                  <label class="sr-only"  for="inlineFormInput">Usuario</label>
+                  <input type="text" name="user" class="form-control" id="inlineFormInput" placeholder="Username">
+                  <label class="sr-only"  for="inlineFormInputGroup">Contraseña</label>
+                  <input type="text" name="Psw" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+                  <button type="submit" name="Entrar" class="btn btn-primary mb-2">Entrar</button>
                   <button type="submit" class="btn btn-primary mb-2"><a class ="CrearUsuario" href="./CUsuario.php">Crear</a></button>
-
+    
                 </form>
       
           </ul>

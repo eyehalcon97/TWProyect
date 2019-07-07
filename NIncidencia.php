@@ -10,11 +10,42 @@
 
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
-    
-    $Usuario ="eyehalcon97";
-    $id = getidusuario($Usuario);
-    $tipo = getipousuario($id);
+    session_start();
+    $argumentosTwig = ['tipo' => null ];
 
+    if(isset($_SESSION["Nombre"])){
+        $Usuario =$_SESSION["Nombre"];
+        $id = getidusuario($Usuario);
+        $tipo = getipousuario($id);
+        $argumentosTwig['tipo']=$tipo;
+    }
+    if( isset($_POST['Entrar'])){
+        $User = $_POST['user'];
+        $Psw = $_POST['Psw'];
+        $inicio = IniciarSesion($User,$Psw);
+        if($inicio == true){
+            
+            $_SESSION["Nombre"] = $User;
+            $Usuario =$_SESSION["Nombre"];
+            $id = getidusuario($Usuario);
+            $tipo = getipousuario($id);
+            $argumentosTwig['tipo']=$tipo;
+            header("Location: ./NIncidencia.php");
+        }
+
+    }
+    if( isset($_POST['Salir'])){
+        if(session_status()==PHP_SESSION_NONE){
+            session_start();
+        } 
+
+        session_unset(); 
+        //$param= session_get_cookie_params(); 
+        //setcookie(session_name(), $_COOKIE[session_name()], time()-2592000, $param['path'], $param['domain'], $param['secure'], $param['httponly']);
+        session_destroy();
+        header("Location: ./index.php");
+    }
+    
     
     if( isset($_POST['btnCrear'])){
 
@@ -25,10 +56,10 @@
 
         
     }
-    $argumentosTwig = [ 'tipo' => $tipo];
+    
 
 
-    if($tipo != "Administrador" && $tipo != "Colaborador"){
+    if( $argumentosTwig['tipo'] != "Administrador" &&  $argumentosTwig['tipo'] != "Colaborador"){
         $template = $twig->load('/html/Error.html');
     }else{
     $template = $twig->load('/html/NIncidencia.html');

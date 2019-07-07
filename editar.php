@@ -5,21 +5,23 @@
 
     require_once './vendor/autoload.php';
     require_once './php/funciones.php';
-    require_once './php/Usuario.php';
-
     session_start();
-    $loader = new \Twig\Loader\FilesystemLoader('.');
-    $twig = new \Twig\Environment($loader);
-
+    $argumentosTwig = [ 'tipo' => null ];
     
-    $argumentosTwig = ['tipo' => null ];
-
     if(isset($_SESSION["Nombre"])){
-        
+
         $Usuario =$_SESSION["Nombre"];
         $id = getidusuario($Usuario);
         $tipo = getipousuario($id);
         $argumentosTwig['tipo']=$tipo;
+    }
+
+    if( isset($_POST['Editar'])){
+        $idIncidencia = $_POST['id'];
+        $incidencia = getincidenciaporid($idIncidencia);
+        $argumentosTwig['incidencia']=$incidencia;
+        
+    
     }
     if( isset($_POST['Entrar'])){
         $User = $_POST['user'];
@@ -34,7 +36,7 @@
             $id = getidusuario($Usuario);
             $tipo = getipousuario($id);
             $argumentosTwig['tipo']=$tipo;
-            header("Location: ./MUsuario.php");
+            header("Location: ./editar.php");
         }
 
     }
@@ -50,53 +52,34 @@
         header("Location: ./index.php");
     }
     
+
+
+    $loader = new \Twig\Loader\FilesystemLoader('.');
+    $twig = new \Twig\Environment($loader);
+
     
-    if( isset($_POST['Editar'])){
-        $idUsuario = $_POST['id'];
 
 
-        $Usuario = obtenerUsuarioporId($idUsuario);
-        
-        $argumentosTwig['usuario']=$Usuario;
-
-        
-
-    }
-
-    if( isset($_POST['btnModificar'])){
-        
-        $Nombre = $_POST['Nombre'];
-        $Papellido = $_POST['Papellido'];
-        $Sapellido = $_POST['Sapellido'];
-        $Psw = $_POST['Psw'];
-        $Psw = $_POST['CPsw'];
-        $email = $_POST['Email'];
-        $User = $_POST['User'];
-        $Ciudad = $_POST['Ciudad'];
-        $Pais = $_POST['Pais'];
-        $Tipo = $_POST['Tipo'];
+    if( isset($_POST['btnEditar'])){
+        $id = $idIncidencia;
+        $Titulo = $_POST['Titulo'];
+        $Descripcion = $_POST['Descripcion'];
+        $Lugar = $_POST['Lugar'];
         $Estado = $_POST['Estado'];
         $Foto = $_POST['Foto'];
+        $Palabras = $_POST['Palabras'];
 
-
-       ModificarUsuario($id,$Nombre,$Papellido,$Sapellido,$Psw,$email,$User,$Ciudad,$Pais,$Tipo,$Estado,$Foto);
-       
-       
-
-       
-   }
-
-    
-    if($argumentosTwig['tipo'] != "Administrador" && $argumentosTwig['tipo'] != "Colaborador" ){
-        $template = $twig->load('/html/Error.html');
-    }else{
-    $template = $twig->load('/html/MUsuario.html');
-
+        ModificarIncidencia($id,$Titulo,$Descripcion,$Lugar,$Estado,$Foto,$Palabras);
+        header("Location: ./index.php");
     }
 
+    if($argumentosTwig['tipo'] != "Administrador"  && $argumentosTwig['tipo'] != "Colaborador"){
+        $template = $twig->load('/html/Error.html');
+    }else{
+    $template = $twig->load('/html/editar.html');
+    }
     
 
-    
     echo $template->render($argumentosTwig);
     
 

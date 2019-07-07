@@ -32,9 +32,10 @@ function CrearIncidencia($titulo,$descripcion,$lugar,$idUsuario,$estado,$likes,$
     BasedeDatos::ejecutar($sentencia);
 }
 
-function CrearComentario($idIncidencia,$idusuario,$fecha,$comentario){
-    $sentencia = "INSERT INTO incidencias(idIncidencia,idusuario,fecha,comentario)
-    VALUES ('$idIncidencia','$idusuario','$fecha','$comentario');";
+function CrearComentario($idIncidencia,$idusuario,$comentario){
+    $sentencia = "INSERT INTO comentarios(idIncidencia,idusuario,comentario)
+    VALUES ('$idIncidencia','$idusuario','$comentario');";
+    BasedeDatos::ejecutar($sentencia);
 }
 
 function EliminarComentariosdeIncidencia($idIncidencia){
@@ -47,7 +48,7 @@ function EliminarComentariosdeUsuario($idusuario){
     BasedeDatos::ejecutar($sentencia);
 }
 
-function EliminarComentarioporid($idComentario){
+function EliminaComentarioporid($idComentario){
     $sentencia = "DELETE FROM comentarios WHERE idComentario = '$idComentario';";
     BasedeDatos::ejecutar($sentencia);
 }
@@ -123,6 +124,40 @@ function getincidenciaUsuario($idUsuario){
 
 }
 
+function getincidenciaportitulo($Titulo){
+    $sentencia= "SELECT * FROM incidencias WHERE titulo = '$Titulo';";
+    $resultado = BasedeDAtos::ejecutar($sentencia);
+    $arrayDevolucion = array();
+    
+    
+    while( $elemento = $resultado->fetch_assoc() ){
+        $incidencia = new Incidencia($elemento['id'],$elemento['titulo'],$elemento['descripcion'],$elemento['lugar'],$elemento['fecha'],$elemento['idUsuario'],$elemento['estado'],$elemento['likes'],$elemento['dislikes'],$elemento['Foto'],$elemento['Palabras']);
+        array_push($arrayDevolucion,$incidencia);
+    }
+
+    //echo $arrayDevolucion;
+    return $arrayDevolucion;
+
+}
+
+function getincidenciaporid($id){
+    $sentencia= "SELECT * FROM incidencias WHERE  id = '$id';";
+    $resultado = BasedeDAtos::ejecutar($sentencia);
+    $arrayDevolucion = array();
+    
+    
+    $elemento = $resultado->fetch_assoc();
+        $incidencia = new Incidencia($elemento['id'],$elemento['titulo'],$elemento['descripcion'],$elemento['lugar'],$elemento['fecha'],$elemento['idUsuario'],$elemento['estado'],$elemento['likes'],$elemento['dislikes'],$elemento['Foto'],$elemento['Palabras']);
+        
+    
+
+    //echo $arrayDevolucion;
+    return $incidencia;
+
+}
+
+
+
 function EliminarUsuarioporid($id){
     $sentencia = "DELETE FROM usuarios WHERE id = '$id';";
     BasedeDatos::ejecutar($sentencia);
@@ -192,17 +227,33 @@ function ObtenerTodasIncidencias(){
 }
 
 function ObtenerTodosComentarios($idIncidencia){
-    $sentencia= "SELECT * FROM comentarios WHERE IdIncidencia = '$IdIncidencia';";
+    $sentencia= "SELECT * FROM comentarios WHERE IdIncidencia = '$idIncidencia';";
     $resultado = BasedeDatos::ejecutar($sentencia);
 
     $arrayDevolucion = array();
     
     
     while( $elemento = $resultado->fetch_assoc() ){
-        $comentario = new Comentario($elemento['idComentario'],$elemento['idIncidencia'],$elemento['idUsuario'],$elemento['fecha'],$elemento['comentario'],);
+        $comentario = new Comentario($elemento['idComentario'],$elemento['idIncidencia'],$elemento['idusuario'],$elemento['fecha'],$elemento['comentario'],);
         array_push($arrayDevolucion,$comentario);
     }
-    //echo $arrayDevolucion;
+    //var_dump ($arrayDevolucion);
+    return $arrayDevolucion;
+
+
+}
+function ObtenerTodosComentariosdetodo(){
+    $sentencia= "SELECT * FROM comentarios;";
+    $resultado = BasedeDatos::ejecutar($sentencia);
+
+    $arrayDevolucion = array();
+    
+    
+    while( $elemento = $resultado->fetch_assoc() ){
+        $comentario = new Comentario($elemento['idComentario'],$elemento['idIncidencia'],$elemento['idusuario'],$elemento['fecha'],$elemento['comentario'],);
+        array_push($arrayDevolucion,$comentario);
+    }
+    //var_dump ($arrayDevolucion);
     return $arrayDevolucion;
 
 
@@ -241,15 +292,15 @@ function BuscarIncidencia($palabra){
     $sentencia= "SELECT * FROM incidencias where Palabras = '$palabra';";
     $resultado = BasedeDatos::ejecutar($sentencia);
 
-    $arrayDevolucion = array();
     
     
-    while( $elemento = $resultado->fetch_assoc() ){
+    
+    $elemento = $resultado->fetch_assoc();
         $incidencia = new Incidencia($elemento['id'],$elemento['titulo'],$elemento['descripcion'],$elemento['lugar'],$elemento['fecha'],$elemento['idUsuario'],$elemento['estado'],$elemento['likes'],$elemento['dislikes'],$elemento['Foto'],$elemento['Palabras']);
-        array_push($arrayDevolucion,$incidencia);
-    }
+        
+    
 
-    return $arrayDevolucion;
+    return $incidencia;
 
 }
 
@@ -296,6 +347,22 @@ function BuscarUsuario($Usuario){
 
 }
 
+function obtenerUsuarioporId($idUsuario){
+    $sentencia= "SELECT * FROM usuarios where id = '$idUsuario';";
+    $resultado = BasedeDatos::ejecutar($sentencia);
+
+    
+    
+    
+    $elemento = $resultado->fetch_assoc();
+    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Conexion']);
+        
+    
+
+    return $usuario;
+
+}
+
 
 function ModificarUsuario($id,$Nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario,$Ciudad,$Pais,$Tipo,$Estado,$Foto){
     $array = array();
@@ -329,5 +396,30 @@ function ModificarUsuario($id,$Nombre,$Papellido,$Sapellido,$Psw,$email,$Usuario
 
 
 }
+
+function ModificarIncidencia($id,$Titulo,$Descripcion,$Lugar,$Estado,$Foto,$Palabras){
+    $array = array();
+    $sentencia = "UPDATE incidencias SET titulo='$Titulo' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE incidencias SET descripcion='$Descripcion' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE incidencias SET Slugar='$Lugar' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE incidencias SET estado='$Estado' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE incidencias SET Foto='$Foto' where id = '$id' ;";
+    array_push($array,$sentencia);
+    $sentencia = "UPDATE incidencias SET Palabras='$Palabras' where id = '$id' ;";
+    array_push($array,$sentencia);
+
+
+    foreach($array as $valor){
+        BasedeDAtos::ejecutar($valor);
+    }
+
+
+}
+
+
 
 ?>

@@ -5,36 +5,38 @@
 
     require_once './vendor/autoload.php';
     require_once './php/funciones.php';
-    require_once './php/Usuario.php';
-
     session_start();
+
+
+    
+    //var_dump($comentarios);
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
 
-    
-    $argumentosTwig = ['tipo' => null ];
+    $argumentosTwig = ['tipo' => null , 'incidencia' =>null, 'comentarios'=>null];
 
     if(isset($_SESSION["Nombre"])){
         
+        echo $_SESSION["Nombre"];
         $Usuario =$_SESSION["Nombre"];
         $id = getidusuario($Usuario);
         $tipo = getipousuario($id);
         $argumentosTwig['tipo']=$tipo;
     }
+
     if( isset($_POST['Entrar'])){
         $User = $_POST['user'];
         $Psw = $_POST['Psw'];
         $inicio = IniciarSesion($User,$Psw);
         if($inicio == true){
-            echo "entro";
+            
             
             $_SESSION["Nombre"] = $User;
             $Usuario =$_SESSION["Nombre"];
-            echo $Usuario;
             $id = getidusuario($Usuario);
             $tipo = getipousuario($id);
             $argumentosTwig['tipo']=$tipo;
-            header("Location: ./MUsuario.php");
+            header("Location: ./comentar.php");
         }
 
     }
@@ -50,53 +52,37 @@
         header("Location: ./index.php");
     }
     
+
     
-    if( isset($_POST['Editar'])){
-        $idUsuario = $_POST['id'];
-
-
-        $Usuario = obtenerUsuarioporId($idUsuario);
+    if( isset($_POST['Comentario'])){
+        $idincidencia = $_POST['id'];
+        $incidencia = getincidenciaporid($idincidencia);
+        $argumentosTwig['incidencia']=$incidencia;
+        $comentarios = ObtenerTodosComentarios($idincidencia);
+        $argumentosTwig['comentarios']=$comentarios;
+    }
+    
+    if( isset($_POST['comentar'])){
+        $comentario = $_POST['comentario'];
+        $id = $_POST['id'];
         
-        $argumentosTwig['usuario']=$Usuario;
-
-        
-
+        CrearComentario($id,$Usuario,$comentario);
+        header("Location: ./index.php");
     }
 
-    if( isset($_POST['btnModificar'])){
+    if( isset($_POST['Eliminar'])){
+        $id = $_POST['id'];
         
-        $Nombre = $_POST['Nombre'];
-        $Papellido = $_POST['Papellido'];
-        $Sapellido = $_POST['Sapellido'];
-        $Psw = $_POST['Psw'];
-        $Psw = $_POST['CPsw'];
-        $email = $_POST['Email'];
-        $User = $_POST['User'];
-        $Ciudad = $_POST['Ciudad'];
-        $Pais = $_POST['Pais'];
-        $Tipo = $_POST['Tipo'];
-        $Estado = $_POST['Estado'];
-        $Foto = $_POST['Foto'];
-
-
-       ModificarUsuario($id,$Nombre,$Papellido,$Sapellido,$Psw,$email,$User,$Ciudad,$Pais,$Tipo,$Estado,$Foto);
-       
-       
-
-       
-   }
+        EliminaComentarioporid($id);
+        header("Location: ./index.php");
+    }
 
     
-    if($argumentosTwig['tipo'] != "Administrador" && $argumentosTwig['tipo'] != "Colaborador" ){
+    if($argumentosTwig['tipo'] != "Administrador"  && $argumentosTwig['tipo'] != "Colaborador"){
         $template = $twig->load('/html/Error.html');
     }else{
-    $template = $twig->load('/html/MUsuario.html');
-
+    $template = $twig->load('/html/Comentar.html');
     }
-
-    
-
-    
     echo $template->render($argumentosTwig);
     
 
