@@ -13,32 +13,38 @@
     $loader = new \Twig\Loader\FilesystemLoader('.');
     $twig = new \Twig\Environment($loader);
 
-    $argumentosTwig = ['tipo' => null , 'incidencia' =>null, 'comentarios'=>null];
+    $argumentosTwig = ['tipo' => null , 'incidencia' =>null, 'comentarios'=>null , 'user' => null ];
 
     if(isset($_SESSION["Nombre"])){
-        
-        echo $_SESSION["Nombre"];
+
         $Usuario =$_SESSION["Nombre"];
         $id = getidusuario($Usuario);
         $tipo = getipousuario($id);
         $argumentosTwig['tipo']=$tipo;
+        $user = BuscarUsuario($Usuario);
+        $argumentosTwig['user']=$user;
     }
-
+    
     if( isset($_POST['Entrar'])){
         $User = $_POST['user'];
         $Psw = $_POST['Psw'];
         $inicio = IniciarSesion($User,$Psw);
+        
         if($inicio == true){
-            
-            
+            echo "entro";
             $_SESSION["Nombre"] = $User;
             $Usuario =$_SESSION["Nombre"];
             $id = getidusuario($Usuario);
             $tipo = getipousuario($id);
             $argumentosTwig['tipo']=$tipo;
-            header("Location: ./comentar.php");
+            $user = BuscarUsuario($Usuario);
+            $argumentosTwig['user']=$user;
+            header("Location: ./index.php");
         }
 
+    }
+    if( isset($_POST['Crear'])){
+        header("Location: ./CUsuario.php");
     }
     if( isset($_POST['Salir'])){
         if(session_status()==PHP_SESSION_NONE){
@@ -50,6 +56,10 @@
         //setcookie(session_name(), $_COOKIE[session_name()], time()-2592000, $param['path'], $param['domain'], $param['secure'], $param['httponly']);
         session_destroy();
         header("Location: ./index.php");
+    }
+
+    if( isset($_POST['MUsuario'])){
+        header("Location: ./MUsuario.php");
     }
     
 

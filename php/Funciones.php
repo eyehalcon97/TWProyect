@@ -335,15 +335,15 @@ function BuscarUsuario($Usuario){
     $sentencia= "SELECT * FROM usuarios where Usuario = '$Usuario';";
     $resultado = BasedeDatos::ejecutar($sentencia);
 
-    $arrayDevolucion = array();
     
     
-    while($elemento = $resultado->fetch_assoc()){
-        $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Conexion']);
-        array_push($arrayDevolucion,$usuario);
-    }
+    
+    $elemento = $resultado->fetch_assoc();
+    $usuario = new Usuario($elemento['id'],$elemento['nombre'],$elemento['Papellido'],$elemento['Sapellido'],$elemento['Psw'],$elemento['email'],$elemento['Usuario'],$elemento['Ciudad'],$elemento['Pais'],$elemento['Tipo'],$elemento['Estado'],$elemento['Foto'],$elemento['Conexion']);
+        
+    
 
-    return $arrayDevolucion;
+    return $usuario;
 
 }
 
