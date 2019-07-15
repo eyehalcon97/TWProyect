@@ -1,9 +1,9 @@
 <?php
-require_once'./php/BasedeDatos.php';
-require_once'./php/Incidencia.php';
-require_once'./php/Usuario.php';
-require_once'./php/Comentario.php';
-require_once'./php/Log.php';
+require_once 'BasedeDatos.php';
+require_once 'Incidencia.php';
+require_once 'Usuario.php';
+require_once 'Comentario.php';
+require_once 'Log.php';
 
 
 //Permite almacenar un usuario con la información obtenida con el formulario.

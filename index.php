@@ -2,10 +2,12 @@
 
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
+    //require_once get_include_path() . PATH_SEPARATOR . '/php/modelos/incidencias/IncidenciaDAO.inc.php';
+     //require_once './php/modelos/incidencias/IncidenciaDAO.inc.php';
 
-    require_once './vendor/autoload.php';
-    require_once './php/funciones.php';
-    require_once './php/Incidencia.php';
+    require_once 'vendor/autoload.php';
+    require_once 'php/Funciones.php';
+    require_once 'php/Incidencia.php';
 
 
 
